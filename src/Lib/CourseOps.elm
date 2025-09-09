@@ -1,24 +1,6 @@
-module Lib.CourseOps exposing (filter, sort)
+module Lib.CourseOps exposing (sort)
 
-import String
 import Types exposing (Course, SortBy(..))
-
-
-filter : String -> List Course -> List Course
-filter q xs =
-    let
-        t =
-            String.toLower q
-
-        f c =
-            String.contains t (String.toLower c.name)
-                || String.contains t (String.toLower c.id)
-    in
-    if String.length t == 0 then
-        xs
-
-    else
-        List.filter f xs
 
 
 sort : SortBy -> Bool -> List Course -> List Course

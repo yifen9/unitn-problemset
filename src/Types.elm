@@ -1,4 +1,4 @@
-module Types exposing (Course, SortBy(..))
+module Types exposing (Course, Problem, SortBy(..))
 
 
 type alias Course =
@@ -14,3 +14,9 @@ type SortBy
     | ById
     | BySize
     | ByCoverage
+
+
+type alias Problem =
+    { id : String
+    , title : String
+    }

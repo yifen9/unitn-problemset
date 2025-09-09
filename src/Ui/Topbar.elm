@@ -1,22 +1,13 @@
-module Ui.Topbar exposing (viewTitle, viewSearch, viewIcons)
+module Ui.Topbar exposing (viewIcons, viewTitle)
 
-import Html exposing (Html, a, div, i, input, text)
+import Html exposing (Html, a, div, i, text)
 import Html.Attributes as A
-import Html.Events as E
+
 
 viewTitle : Html msg
 viewTitle =
     a [ A.href "/", A.class "btn btn-ghost text-2xl font-bold" ] [ text "UniTN Problemset" ]
 
-viewSearch : (String -> msg) -> String -> Html msg
-viewSearch onQuery q =
-    input
-        [ A.class "input w-full max-w-[1400px] text-xl text-center uppercase font-bold"
-        , E.onInput onQuery
-        , A.value q
-        , A.attribute "aria-label" "Search courses by name or id"
-        ]
-        []
 
 viewIcons : Html msg
 viewIcons =
@@ -25,6 +16,7 @@ viewIcons =
         , iconLink "https://discord.com/invite/your-server" "Discord" "fa-brands fa-discord"
         , iconLink "https://github.com/yifen9/pset" "GitHub" "fa-brands fa-github"
         ]
+
 
 iconLink : String -> String -> String -> Html msg
 iconLink url label iconClass =
