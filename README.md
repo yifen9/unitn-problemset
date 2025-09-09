@@ -1,1 +1,1 @@
-test
+[![CI](https://github.com/yifen9/unitn-problemset/actions/workflows/ci.yml/badge.svg)](https://github.com/yifen9/unitn-problemset/actions/workflows/ci.yml)

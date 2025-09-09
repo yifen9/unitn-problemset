@@ -1,4 +1,6 @@
-import "./styles/app.css";
-import { Elm } from "./Main.elm";
+import './styles/app.css'
+import { Elm } from './Main.elm'
 
-Elm.Main.init({ node: document.getElementById("app")! });
+const node = document.getElementById('app')
+if (!(node instanceof HTMLElement)) throw new Error('#app not found')
+Elm.Main.init({ node })
