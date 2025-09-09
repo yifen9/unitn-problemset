@@ -1,13 +1,17 @@
 module Ui.ProblemContent exposing (view)
 
-import Html exposing (Html, div, h1, p, text)
+import Html exposing (Html, div, h1, p, span, text)
 import Html.Attributes as A
 import Types exposing (ProblemDetail)
 
 
 view : ProblemDetail -> Html msg
 view detail =
-    div [ A.class "p-3 grid gap-6" ]
-        [ h1 [ A.class "text-3xl font-extrabold uppercase tracking-wide" ] [ text detail.title ]
-        , p [ A.class "whitespace-pre-wrap text-xl leading-8" ] [ text detail.questionMd ]
+    div [ A.class "h-full grid grid-rows-[4rem_1fr]" ]
+        [ div [ A.class "h-16 px-6 flex items-center border-b-2 border-base-300/60" ]
+            [ span [ A.class "text-lg font-semibold" ] [ text ("ID " ++ detail.id ++ " · " ++ detail.date) ] ]
+        , div [ A.class "p-6 grid gap-4 content-start justify-items-start" ]
+            [ h1 [ A.class "text-4xl font-extrabold uppercase tracking-wide" ] [ text detail.title ]
+            , p [ A.class "text-2xl leading-9 whitespace-pre-wrap text-left" ] [ text detail.questionMd ]
+            ]
         ]

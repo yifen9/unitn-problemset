@@ -1,4 +1,4 @@
-module Ui.RightProblemPanel exposing (Props, view)
+module Ui.RightProblemPanel exposing (Props, placeholder, view)
 
 import Html exposing (Html, button, div, span, text)
 import Html.Attributes as A
@@ -25,8 +25,8 @@ isSelected id sel =
 
 view : Props msg -> Html msg
 view props =
-    div [ A.class "grid grid-rows-[4rem_1fr] h-full" ]
-        [ div [ A.class "grid grid-cols-3 gap-2 p-2 h-16 items-center justify-items-center" ]
+    div [ A.class "h-full grid grid-rows-[4rem_1fr]" ]
+        [ div [ A.class "h-16 grid grid-cols-3 gap-2 p-2 items-center justify-items-center border-b-2 border-base-300/60" ]
             [ button
                 ([ A.class "btn w-full" ]
                     ++ (if props.navEnabled then
@@ -58,7 +58,7 @@ view props =
                 )
                 [ text "NEXT" ]
             ]
-        , div [ A.class "p-3 grid gap-2 content-start" ]
+        , div [ A.class "p-4 grid gap-2 content-start" ]
             (List.map
                 (\c ->
                     let
@@ -79,10 +79,22 @@ view props =
                         [ A.class cls
                         , E.onClick (props.onToggle c.id)
                         ]
-                        [ span [ A.class "font-mono mr-3" ] [ text c.id ]
+                        [ span [ A.class "font-mono mr-2" ] [ text c.id ]
                         , span [] [ text c.textMd ]
                         ]
                 )
                 props.detail.choices
             )
+        ]
+
+
+placeholder : Html msg
+placeholder =
+    div [ A.class "h-full grid grid-rows-[4rem_1fr]" ]
+        [ div [ A.class "h-16 grid grid-cols-3 gap-2 p-2 items-center justify-items-center border-b-2 border-base-300/60" ]
+            [ button [ A.class "btn w-full btn-disabled", A.disabled True ] [ text "PREV" ]
+            , button [ A.class "btn btn-primary w-full btn-disabled", A.disabled True ] [ text "SUBMIT" ]
+            , button [ A.class "btn w-full btn-disabled", A.disabled True ] [ text "NEXT" ]
+            ]
+        , div [] []
         ]

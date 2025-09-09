@@ -8,9 +8,8 @@ import Page.Course as Course
 import Page.Home as Home
 import Route
 import Ui.CourseSidebar as Sidebar
-import Url
 import Ui.RightProblemPanel as RP
-
+import Url
 
 
 type alias Model =
@@ -131,7 +130,9 @@ view model =
                     (H.text "")
                     (Sidebar.view { startEnabled = False } |> H.map HomeMsg)
                     (H.map HomeMsg (Home.view model.home))
-                    (H.text "")
+                    RP.placeholder
+
+                -- 右栏常驻占位
                 ]
             }
 
@@ -155,7 +156,7 @@ view model =
                                         |> H.map CourseMsg
 
                                 Nothing ->
-                                    H.text ""
+                                    RP.placeholder
                     in
                     { title = cm.title ++ " · UniTN Problemset"
                     , body =
@@ -168,4 +169,6 @@ view model =
                     }
 
                 Nothing ->
-                    { title = "UniTN Problemset", body = [ H.text "" ] }
+                    { title = "UniTN Problemset"
+                    , body = [ H.text "" ]
+                    }

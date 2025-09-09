@@ -1,18 +1,18 @@
 module Page.Course exposing
     ( Model
     , Msg(..)
+    , getCurrentDetail
     , init
     , leftPanel
     , topCenter
     , update
     , view
-    , getCurrentDetail
     )
 
-
 import Dict exposing (Dict)
-import Html exposing (Html, div, text)
+import Html exposing (Html, a, div, text)
 import Html.Attributes as A
+import Html.Events as E
 import Lib.Courses as Courses
 import Lib.Problems as P
 import Types exposing (Problem, ProblemDetail, ProblemSortBy(..), ProblemSummary, ProblemType(..))
@@ -49,6 +49,7 @@ type Msg
     | SetFragment (Maybe String)
     | ToggleChoice String
     | NoOp
+    | GoList
 
 
 init : String -> Maybe String -> ( Model, Cmd Msg )
@@ -178,6 +179,9 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
+        GoList ->
+            ( { model | mode = TableView }, Cmd.none )
+
 
 view : Model -> Html Msg
 view model =
@@ -193,8 +197,7 @@ view model =
         ProblemView pid ->
             case Dict.get pid model.details of
                 Just d ->
-                    div [ A.class "h-full grid grid-cols-1" ]
-                        [ PC.view d ]
+                    PC.view d
 
                 Nothing ->
                     div [ A.class "p-6" ] [ text "Loading..." ]
@@ -202,7 +205,12 @@ view model =
 
 topCenter : Model -> Html Msg
 topCenter model =
-    div [ A.class "text-2xl font-extrabold uppercase tracking-wide" ] [ text model.title ]
+    a
+        [ A.href ("/?course=" ++ model.id)
+        , A.class "text-2xl font-extrabold uppercase tracking-wide link"
+        , E.onClick GoList
+        ]
+        [ text model.title ]
 
 
 leftPanel : Html Msg

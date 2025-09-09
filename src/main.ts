@@ -1,6 +1,9 @@
 import "./styles/app.css";
+import { setupKatex } from "./katex";
 import { Elm } from "./Main.elm";
 
-const node = document.getElementById("app");
-if (!(node instanceof HTMLElement)) throw new Error("#app not found");
-Elm.Main.init({ node });
+const root = document.getElementById("app");
+if (root) {
+	Elm.Main.init({ node: root });
+	setupKatex(root);
+}

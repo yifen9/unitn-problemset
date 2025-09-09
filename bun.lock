@@ -2,7 +2,6 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "title": "unitn-problemset",
       "dependencies": {
         "@fortawesome/fontawesome-free": "^7.0.1",
         "katex": "^0.16.22",
