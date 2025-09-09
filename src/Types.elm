@@ -10,10 +10,10 @@ type alias Course =
 
 
 type SortBy
-    = ByName
-    | ById
-    | BySize
-    | ByCoverage
+    = CByTitle
+    | CById
+    | CBySize
+    | CByCoverage
 
 
 type alias Problem =

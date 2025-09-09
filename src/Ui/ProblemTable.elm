@@ -109,7 +109,7 @@ view props =
             (List.map
                 (\p ->
                     tr [ A.attribute "role" "row" ]
-                        [ tdL (a [ A.href ("#p-" ++ p.id), A.class "link" ] [ text p.title ])
+                        [ tdL (a [ A.href ("#problem-" ++ p.id), A.class "link" ] [ text p.title ])
                         , tdC p.id
                         , tdC p.date
                         , tdCBool p.solved

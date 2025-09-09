@@ -8,16 +8,16 @@ sort key asc xs =
     let
         cmp a b =
             case key of
-                ByName ->
+                CByTitle ->
                     compare a.name b.name
 
-                ById ->
+                CById ->
                     compare a.id b.id
 
-                BySize ->
+                CBySize ->
                     compare a.size b.size
 
-                ByCoverage ->
+                CByCoverage ->
                     compare a.coverage b.coverage
 
         s =

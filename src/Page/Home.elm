@@ -23,7 +23,7 @@ type Msg
 
 init : ( Model, Cmd Msg )
 init =
-    ( { build = "", courses = [], sortBy = ByName, asc = True }
+    ( { build = "", courses = [], sortBy = CByTitle, asc = True }
     , C.load Loaded
     )
 

@@ -94,10 +94,10 @@ view props =
         [ node "colgroup" [] [ half, sixth, sixth, sixth ]
         , thead [ A.class "sticky top-0 z-10 border-b-2 border-base-300/60 bg-base-100", A.attribute "role" "rowgroup" ]
             [ tr [ A.attribute "role" "row" ]
-                [ thc props.sortBy props.asc "NAME" ByName props.onSort
-                , thc props.sortBy props.asc "ID" ById props.onSort
-                , thc props.sortBy props.asc "SIZE" BySize props.onSort
-                , thc props.sortBy props.asc "COVERAGE" ByCoverage props.onSort
+                [ thc props.sortBy props.asc "NAME" CByTitle props.onSort
+                , thc props.sortBy props.asc "ID" CById props.onSort
+                , thc props.sortBy props.asc "SIZE" CBySize props.onSort
+                , thc props.sortBy props.asc "COVERAGE" CByCoverage props.onSort
                 ]
             ]
         , tbody [ A.attribute "role" "rowgroup" ]
