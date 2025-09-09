@@ -1,6 +1,6 @@
 module Ui.RightProblemPanel exposing (Props, placeholder, view)
 
-import Html exposing (Html, button, div, span, text)
+import Html exposing (Html, button, div, span, text, node)
 import Html.Attributes as A
 import Html.Events as E
 import Types exposing (ProblemDetail, ProblemType(..))
@@ -80,7 +80,7 @@ view props =
                         , E.onClick (props.onToggle c.id)
                         ]
                         [ span [ A.class "font-mono mr-2" ] [ text c.id ]
-                        , span [] [ text c.textMd ]
+                        , node "katex-host" [ A.attribute "data-content" c.textMd ] []
                         ]
                 )
                 props.detail.choices
