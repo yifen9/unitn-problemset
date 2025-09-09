@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: oven-sh/setup-bun@main
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun run build:data
+        if: ${{ hashFiles('scripts/**') != '' }}
+      - run: bun run build
+      - run: |
+          if [ -n "${CUSTOM_DOMAIN:-}" ]; then
+            echo "$CUSTOM_DOMAIN" > dist/CNAME
+          fi
+        env:
+          CUSTOM_DOMAIN: pset.yifen9.li
+      - uses: actions/upload-pages-artifact@main
+        with:
+          path: dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@main

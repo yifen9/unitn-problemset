@@ -1,0 +1,7 @@
+{
+  "build": "2025-09-09",
+  "courses": [
+    { "id": "145992", "name": "Computer Architectures", "size": 120 },
+    { "id": "140001", "name": "Algorithms", "size": 96 }
+  ]
+}

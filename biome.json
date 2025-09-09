@@ -22,6 +22,14 @@
 					"correctness": { "noUnknownProperty": "off" }
 				}
 			}
+		},
+		{
+			"includes": ["src/elm.d.ts"],
+			"linter": {
+				"rules": {
+					"suspicious": { "noExplicitAny": "off" }
+				}
+			}
 		}
 	]
 }

@@ -1,4 +1,8 @@
-module Types exposing (User)
+module Types exposing (Course)
 
-type alias User =
-    { email : String, slug : Maybe String }
+type alias Course =
+    { id : String
+    , name : String
+    , size : Int
+    , coverage : Int
+    }
