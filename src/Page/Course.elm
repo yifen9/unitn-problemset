@@ -42,7 +42,7 @@ update msg model =
                 found =
                     List.filter (\c -> c.id == model.id) idx.courses
                         |> List.head
-                        |> Maybe.map .name
+                        |> Maybe.map .title
                         |> Maybe.withDefault model.title
             in
             ( { model | title = found }, Cmd.none )
@@ -95,8 +95,19 @@ sortProblems key asc xs =
 
                 PBySolved ->
                     let
-                        ai = if a.solved then 1 else 0
-                        bi = if b.solved then 1 else 0
+                        ai =
+                            if a.solved then
+                                1
+
+                            else
+                                0
+
+                        bi =
+                            if b.solved then
+                                1
+
+                            else
+                                0
                     in
                     case compare ai bi of
                         EQ ->
@@ -110,6 +121,7 @@ sortProblems key asc xs =
     in
     if asc then
         s
+
     else
         List.reverse s
 

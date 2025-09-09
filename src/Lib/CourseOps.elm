@@ -9,16 +9,16 @@ sort key asc xs =
         cmp a b =
             case key of
                 CByTitle ->
-                    compare a.name b.name
+                    compare a.title b.title
 
                 CById ->
                     compare a.id b.id
 
-                CBySize ->
-                    compare a.size b.size
+                CByDate ->
+                    compare a.date b.date
 
-                CByCoverage ->
-                    compare a.coverage b.coverage
+                CByCount ->
+                    compare a.count b.count
 
         s =
             List.sortWith cmp xs

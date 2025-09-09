@@ -6,7 +6,7 @@
 }
 
 @plugin "daisyui/theme" {
-	name: "unitn";
+	title: "unitn";
 	default: true;
 	prefersdark: false;
 	color-scheme: "light";
@@ -33,8 +33,8 @@
 	--radius-selector: 0.5rem;
 	--radius-field: 0.5rem;
 	--radius-box: 0.5rem;
-	--size-selector: 0.3125rem;
-	--size-field: 0.3125rem;
+	--count-selector: 0.3125rem;
+	--count-field: 0.3125rem;
 	--border: 2px;
 	--depth: 1;
 	--noise: 1;

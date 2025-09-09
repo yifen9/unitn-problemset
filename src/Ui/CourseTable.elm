@@ -62,7 +62,7 @@ tdName : Course -> Html msg
 tdName c =
     td [ A.class "h-16 px-6 py-0 border-b-2 border-base-300/60 border-r-2 last:border-r-0" ]
         [ span [ A.class "h-full flex items-center" ]
-            [ a [ A.href ("/?course=" ++ c.id), A.class "link text-2xl" ] [ text c.name ] ]
+            [ a [ A.href ("/?course=" ++ c.id), A.class "link text-2xl" ] [ text c.title ] ]
         ]
 
 
@@ -94,10 +94,10 @@ view props =
         [ node "colgroup" [] [ half, sixth, sixth, sixth ]
         , thead [ A.class "sticky top-0 z-10 border-b-2 border-base-300/60 bg-base-100", A.attribute "role" "rowgroup" ]
             [ tr [ A.attribute "role" "row" ]
-                [ thc props.sortBy props.asc "NAME" CByTitle props.onSort
+                [ thc props.sortBy props.asc "TITLE" CByTitle props.onSort
                 , thc props.sortBy props.asc "ID" CById props.onSort
-                , thc props.sortBy props.asc "SIZE" CBySize props.onSort
-                , thc props.sortBy props.asc "COVERAGE" CByCoverage props.onSort
+                , thc props.sortBy props.asc "DATE" CByDate props.onSort
+                , thc props.sortBy props.asc "COUNT" CByCount props.onSort
                 ]
             ]
         , tbody [ A.attribute "role" "rowgroup" ]
@@ -106,8 +106,8 @@ view props =
                     tr [ A.attribute "role" "row" ]
                         [ tdName c
                         , tdC c.id
-                        , tdC (String.fromInt c.size)
-                        , tdC (String.fromInt c.coverage)
+                        , tdC c.date
+                        , tdC (String.fromInt c.count)
                         ]
                 )
                 props.courses

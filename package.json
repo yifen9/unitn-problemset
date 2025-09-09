@@ -1,5 +1,5 @@
 {
-	"name": "unitn-problemset",
+	"title": "unitn-problemset",
 	"private": true,
 	"scripts": {
 		"build:data": "bun scripts/build-questions.ts",

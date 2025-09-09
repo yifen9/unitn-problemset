@@ -1,22 +1,155 @@
 {
 	"build": "2025-09-09",
 	"courses": [
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "145992", "name": "Computer Architectures", "size": 120 },
-		{ "id": "140001", "name": "Algorithms", "size": 96 }
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "145992",
+			"title": "Computer Architectures",
+			"date": "2025-09-09",
+			"count": 120
+		},
+		{
+			"id": "140001",
+			"title": "Algorithms",
+			"date": "2025-09-09",
+			"count": 90
+		}
 	]
 }

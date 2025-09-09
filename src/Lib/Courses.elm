@@ -19,9 +19,9 @@ decoderCourse : D.Decoder Course
 decoderCourse =
     D.map4 Course
         (D.field "id" D.string)
-        (D.field "name" D.string)
-        (D.field "size" D.int)
-        (D.succeed 0)
+        (D.field "title" D.string)
+        (D.field "date" D.string)
+        (D.field "count" D.int)
 
 
 decoderIndex : D.Decoder CourseIndex

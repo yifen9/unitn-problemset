@@ -1,4 +1,4 @@
-name: CI
+title: CI
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: github-pages
+      title: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment

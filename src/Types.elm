@@ -3,17 +3,17 @@ module Types exposing (Course, Problem, ProblemSortBy(..), SortBy(..))
 
 type alias Course =
     { id : String
-    , name : String
-    , size : Int
-    , coverage : Int
+    , title : String
+    , date : String
+    , count : Int
     }
 
 
 type SortBy
     = CByTitle
     | CById
-    | CBySize
-    | CByCoverage
+    | CByDate
+    | CByCount
 
 
 type alias Problem =

@@ -1,0 +1,25 @@
+{
+	"courseId": "145992",
+	"build": "2025-09-09",
+	"count": 3,
+	"problems": [
+		{
+			"id": "P1",
+			"title": "Sample Problem 1",
+			"date": "2025-01-03",
+			"path": "P1.md"
+		},
+		{
+			"id": "P2",
+			"title": "Sample Problem 2",
+			"date": "2025-01-07",
+			"path": "P2.md"
+		},
+		{
+			"id": "P3",
+			"title": "Sample Problem 3",
+			"date": "2025-01-02",
+			"path": "P3.json"
+		}
+	]
+}
