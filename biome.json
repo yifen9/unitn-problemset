@@ -12,5 +12,16 @@
 				"organizeImports": "on"
 			}
 		}
-	}
+	},
+	"overrides": [
+		{
+			"includes": ["src/styles/app.css"],
+			"linter": {
+				"rules": {
+					"suspicious": { "noUnknownAtRules": "off" },
+					"correctness": { "noUnknownProperty": "off" }
+				}
+			}
+		}
+	]
 }
