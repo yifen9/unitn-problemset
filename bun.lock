@@ -4,22 +4,23 @@
     "": {
       "name": "unitn-problemset",
       "dependencies": {
-        "katex": "latest",
+        "@fortawesome/fontawesome-free": "^7.0.1",
+        "katex": "^0.16.22",
       },
       "devDependencies": {
-        "@biomejs/biome": "latest",
-        "@tailwindcss/typography": "latest",
-        "@tailwindcss/vite": "latest",
-        "daisyui": "latest",
-        "elm": "latest",
-        "elm-format": "latest",
-        "elm-json": "latest",
-        "fast-glob": "latest",
-        "gray-matter": "latest",
-        "tailwindcss": "latest",
-        "typescript": "latest",
-        "vite": "latest",
-        "vite-plugin-elm": "latest",
+        "@biomejs/biome": "^2.2.3",
+        "@tailwindcss/typography": "^0.5.16",
+        "@tailwindcss/vite": "^4.1.13",
+        "daisyui": "^5.1.9",
+        "elm": "^0.19.1-6",
+        "elm-format": "^0.8.8",
+        "elm-json": "^0.2.13",
+        "fast-glob": "^3.3.3",
+        "gray-matter": "^4.0.3",
+        "tailwindcss": "^4.1.13",
+        "typescript": "^5.9.2",
+        "vite": "^7.1.5",
+        "vite-plugin-elm": "^3.0.1",
       },
     },
   },
@@ -111,6 +112,8 @@
     "@esbuild/win32-ia32": ["@esbuild/win32-ia32@0.25.9", "", { "os": "win32", "cpu": "ia32" }, "sha512-b33gLVU2k11nVx1OhX3C8QQP6UHQK4ZtN56oFWvVXvz2VkDoe6fbG8TOgHFxEvqeqohmRnIHe5A1+HADk4OQww=="],
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.25.9", "", { "os": "win32", "cpu": "x64" }, "sha512-PPOl1mi6lpLNQxnGoyAfschAodRFYXJ+9fs6WHXz7CSWKbOqiMZsubC+BQsVKuul+3vKLuwTHsS2c2y9EoKwxQ=="],
+
+    "@fortawesome/fontawesome-free": ["@fortawesome/fontawesome-free@7.0.1", "", {}, "sha512-RLmb9U6H2rJDnGxEqXxzy7ANPrQz7WK2/eTjdZqyU9uRU5W+FkAec9uU5gTYzFBH7aoXIw2WTJSCJR4KPlReQw=="],
 
     "@isaacs/fs-minipass": ["@isaacs/fs-minipass@4.0.1", "", { "dependencies": { "minipass": "^7.0.4" } }, "sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w=="],
 
