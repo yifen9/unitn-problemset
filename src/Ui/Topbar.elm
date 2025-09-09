@@ -11,7 +11,7 @@ viewTitle =
 viewSearch : (String -> msg) -> String -> Html msg
 viewSearch onQuery q =
     input
-        [ A.class "input input-bordered w-full max-w-[min(80ch,100%)] rounded-md text-xl text-center uppercase font-bold tracking-wide"
+        [ A.class "input w-full max-w-[1400px] text-xl text-center uppercase font-bold"
         , E.onInput onQuery
         , A.value q
         , A.attribute "aria-label" "Search courses by name or id"
@@ -28,8 +28,5 @@ viewIcons =
 
 iconLink : String -> String -> String -> Html msg
 iconLink url label iconClass =
-    a
-        [ A.href url, A.target "_blank", A.rel "noreferrer", A.attribute "aria-label" label
-        , A.class "btn btn-ghost btn-square"
-        ]
+    a [ A.href url, A.target "_blank", A.rel "noreferrer", A.attribute "aria-label" label, A.class "btn btn-ghost btn-square" ]
         [ i [ A.class ("text-2xl " ++ iconClass) ] [] ]
