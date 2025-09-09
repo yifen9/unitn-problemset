@@ -59,7 +59,7 @@ view props =
                 )
                 [ text "NEXT" ]
             ]
-        , div [ A.class "p-4 grid gap-2 content-start" ]
+        , div [ A.class "p-2 grid gap-2 content-start" ]
             (List.map
                 (\c ->
                     let
@@ -67,21 +67,21 @@ view props =
                             isSelected c.id props.selected
 
                         base =
-                            "btn w-full justify-start"
+                            "btn btn-lg justify-start"
 
                         cls =
                             if active then
-                                base ++ " btn-secondary"
+                                base ++ " btn-primary"
 
                             else
-                                base
+                                base ++ " btn-outline"
                     in
                     button
                         [ A.class cls
                         , E.onClick (props.onToggle c.id)
                         ]
-                        [ span [ A.class "font-mono mr-2" ] [ text c.id ]
-                        , Math.inline c.textMd
+                        [ span [ A.class "text-2xl font-mono mr-2" ] [ text c.id ]
+                        , Html.span [ A.class "text-2xl" ] [ Math.inline c.textMd ]
                         ]
                 )
                 props.detail.choices
