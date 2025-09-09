@@ -7,10 +7,10 @@ import Ui.RightPanel as RightPanel
 import Ui.SideMenu as SideMenu
 
 
-view : Html msg -> Html msg -> Html msg
-view content rightPanel =
+view : (String -> msg) -> String -> Html msg -> Html msg -> Html msg
+view onQuery q content rightPanel =
     section []
-        [ Header.view
+        [ Header.viewWithSearch onQuery q
         , div [ A.class "pt-14 bg-base-100 text-base-content" ]
             [ div [ A.class "h-[calc(100dvh-3.5rem)] overflow-hidden" ]
                 [ div [ A.class "grid grid-cols-1 lg:grid-cols-12 divide-x-2 divide-base-300/60 h-full" ]

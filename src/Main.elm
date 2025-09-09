@@ -1,24 +1,34 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html)
+import Html as H exposing (Html)
 import Layouts.Shell as Shell
 import Page.Home as Home
+
 
 type alias Model =
     { home : Home.Model }
 
+
 type Msg
     = HomeMsg Home.Msg
+
 
 main : Program () Model Msg
 main =
     Browser.element
-        { init = \_ -> let ( m, c ) = Home.init in ( { home = m }, Cmd.map HomeMsg c )
+        { init =
+            \_ ->
+                let
+                    ( m, c ) =
+                        Home.init
+                in
+                ( { home = m }, Cmd.map HomeMsg c )
         , update = update
         , subscriptions = \_ -> Sub.none
         , view = view
         }
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -30,6 +40,11 @@ update msg model =
             in
             ( { model | home = m2 }, Cmd.map HomeMsg c2 )
 
+
 view : Model -> Html Msg
 view model =
-    Shell.view (Html.map HomeMsg (Home.view model.home)) (Html.text "")
+    Shell.view
+        (\s -> HomeMsg (Home.SetQuery s))
+        model.home.query
+        (H.map HomeMsg (Home.view model.home))
+        (H.text "")
