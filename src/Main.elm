@@ -2,12 +2,12 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav
-import Html as H
-import Html exposing (Html)
+import Html as H exposing (Html)
 import Layouts.Shell as Shell
 import Page.Course as Course
 import Page.Home as Home
 import Route
+import Ui.CourseSidebar as Sidebar
 import Url
 
 
@@ -44,30 +44,22 @@ init _ url key =
         route =
             Route.fromUrl url
 
-        ( homeModel, homeCmd ) =
+        ( hm, hc ) =
             Home.init
     in
     case route of
         Route.Course cid ->
             let
-                ( courseModel, courseCmd ) =
+                ( cm, cc ) =
                     Course.init cid
             in
-            ( { key = key
-              , route = route
-              , home = homeModel
-              , course = Just courseModel
-              }
-            , Cmd.batch [ Cmd.map HomeMsg homeCmd, Cmd.map CourseMsg courseCmd ]
+            ( { key = key, route = route, home = hm, course = Just cm }
+            , Cmd.batch [ Cmd.map HomeMsg hc, Cmd.map CourseMsg cc ]
             )
 
         Route.Home ->
-            ( { key = key
-              , route = route
-              , home = homeModel
-              , course = Nothing
-              }
-            , Cmd.map HomeMsg homeCmd
+            ( { key = key, route = route, home = hm, course = Nothing }
+            , Cmd.map HomeMsg hc
             )
 
 
@@ -93,9 +85,7 @@ update msg model =
                         ( cm, cc ) =
                             Course.init cid
                     in
-                    ( { model | route = route, course = Just cm }
-                    , Cmd.map CourseMsg cc
-                    )
+                    ( { model | route = route, course = Just cm }, Cmd.map CourseMsg cc )
 
                 Route.Home ->
                     ( { model | route = route, course = Nothing }, Cmd.none )
@@ -128,7 +118,7 @@ view model =
             , body =
                 [ Shell.view
                     (H.text "")
-                    (H.text "")
+                    (Sidebar.view { startEnabled = False } |> H.map HomeMsg)
                     (H.map HomeMsg (Home.view model.home))
                     (H.text "")
                 ]

@@ -1,11 +1,12 @@
 module Page.Course exposing (Model, Msg(..), init, leftPanel, topCenter, update, view)
 
-import Html exposing (Html, a, div, text)
+import Html exposing (Html, div, text)
 import Html.Attributes as A
 import Lib.Courses as Courses
 import Types exposing (Problem)
 import Ui.CourseSidebar as Sidebar
 import Ui.ProblemTable as PT
+
 
 type alias Model =
     { id : String
@@ -13,12 +14,15 @@ type alias Model =
     , problems : List Problem
     }
 
+
 type Msg
     = Loaded Courses.LoadResult
+
 
 init : String -> ( Model, Cmd Msg )
 init cid =
     ( { id = cid, title = cid, problems = demo }, Courses.load Loaded )
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -36,17 +40,21 @@ update msg model =
         Loaded (Err _) ->
             ( model, Cmd.none )
 
+
 view : Model -> Html Msg
 view model =
     PT.view { problems = model.problems }
+
 
 topCenter : Model -> Html Msg
 topCenter model =
     div [ A.class "text-2xl font-extrabold uppercase tracking-wide" ] [ text model.title ]
 
+
 leftPanel : Html Msg
 leftPanel =
-    Sidebar.view
+    Sidebar.view { startEnabled = True }
+
 
 demo : List Problem
 demo =

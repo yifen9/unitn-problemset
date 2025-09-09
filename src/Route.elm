@@ -4,9 +4,11 @@ import Url exposing (Url)
 import Url.Parser as P
 import Url.Parser.Query as Q
 
+
 type Route
     = Home
     | Course String
+
 
 fromUrl : Url -> Route
 fromUrl url =
