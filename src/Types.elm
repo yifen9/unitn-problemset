@@ -1,4 +1,4 @@
-module Types exposing (Course, Problem, SortBy(..))
+module Types exposing (Course, Problem, ProblemSortBy(..), SortBy(..))
 
 
 type alias Course =
@@ -19,4 +19,13 @@ type SortBy
 type alias Problem =
     { id : String
     , title : String
+    , date : String
+    , solved : Bool
     }
+
+
+type ProblemSortBy
+    = PByTitle
+    | PById
+    | PByDate
+    | PBySolved
