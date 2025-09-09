@@ -1,13 +1,19 @@
-module Lib.Courses exposing (CourseIndex, decoderIndex, load)
+module Lib.Courses exposing (CourseIndex, LoadResult, decoderIndex, load)
 
 import Http
 import Json.Decode as D
 import Types exposing (Course)
 
+
 type alias CourseIndex =
     { build : String
     , courses : List Course
     }
+
+
+type alias LoadResult =
+    Result Http.Error CourseIndex
+
 
 decoderCourse : D.Decoder Course
 decoderCourse =
@@ -17,13 +23,15 @@ decoderCourse =
         (D.field "size" D.int)
         (D.succeed 0)
 
+
 decoderIndex : D.Decoder CourseIndex
 decoderIndex =
     D.map2 CourseIndex
         (D.field "build" D.string)
         (D.field "courses" (D.list decoderCourse))
 
-load : (Result Http.Error CourseIndex -> msg) -> Cmd msg
+
+load : (LoadResult -> msg) -> Cmd msg
 load tagger =
     Http.get
         { url = "/data/courses/index.json"

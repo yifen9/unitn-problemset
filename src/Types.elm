@@ -1,5 +1,6 @@
 module Types exposing (Course)
 
+
 type alias Course =
     { id : String
     , name : String
