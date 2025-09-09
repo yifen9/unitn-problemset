@@ -4,6 +4,7 @@ import Html exposing (Html, a, div, header, i, input, text)
 import Html.Attributes as A
 import Html.Events as E
 
+
 viewWithSearch : (String -> msg) -> String -> Html msg
 viewWithSearch onQuery q =
     header [ A.class "navbar fixed top-0 inset-x-0 z-50 h-14 bg-base-100 border-b-2 border-base-300/60" ]
@@ -11,7 +12,7 @@ viewWithSearch onQuery q =
             [ a [ A.href "/", A.class "btn btn-ghost text-2xl font-bold" ] [ text "UniTN Problemset" ] ]
         , div [ A.class "navbar-center w-2/3" ]
             [ input
-                [ A.class "input input-bordered w-full rounded-md text-xl"
+                [ A.class "input input-bordered w-full rounded-md text-xl text-center uppercase tracking-wide"
                 , E.onInput onQuery
                 , A.value q
                 ]
@@ -23,6 +24,7 @@ viewWithSearch onQuery q =
             , iconLink "https://github.com/yifen9/unitn-problemset" "GitHub" "fa-brands fa-github"
             ]
         ]
+
 
 iconLink : String -> String -> String -> Html msg
 iconLink url label iconClass =
