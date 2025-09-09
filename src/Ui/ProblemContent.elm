@@ -10,7 +10,7 @@ view detail =
     div [ A.class "h-full grid grid-rows-[4rem_1fr]" ]
         [ div [ A.class "h-16 px-6 flex items-center border-b-2 border-base-300/60" ]
             [ span [ A.class "text-lg font-semibold" ] [ text ("ID " ++ detail.id ++ " · " ++ detail.date) ] ]
-        , div [ A.class "p-6 grid gap-4 content-start justify-items-start" ]
+        , div [ A.class "p-6 grid gap-3 content-start justify-items-start math-scope" ]
             [ h1 [ A.class "text-4xl font-extrabold uppercase tracking-wide" ] [ text detail.title ]
             , p [ A.class "text-2xl leading-9 whitespace-pre-wrap text-left" ] [ text detail.questionMd ]
             ]

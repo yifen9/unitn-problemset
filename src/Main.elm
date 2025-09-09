@@ -4,6 +4,7 @@ import Browser
 import Browser.Navigation as Nav
 import Html as H exposing (Html)
 import Layouts.Shell as Shell
+import List
 import Page.Course as Course
 import Page.Home as Home
 import Route
@@ -62,6 +63,18 @@ init _ url key =
             ( { key = key, route = route, home = hm, course = Nothing }
             , Cmd.map HomeMsg hc
             )
+
+viewHome : Model -> Browser.Document Msg
+viewHome model =
+    { title = "UniTN Problemset"
+    , body =
+        [ Shell.view
+            (H.text "")
+            (Sidebar.view { startEnabled = False } |> H.map HomeMsg)
+            (H.map HomeMsg (Home.view model.home))
+            RP.placeholder
+        ]
+    }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -124,51 +137,59 @@ view : Model -> Browser.Document Msg
 view model =
     case model.route of
         Route.Home ->
-            { title = "UniTN Problemset"
+            viewHome model
+
+        Route.Course _ _ ->
+            viewCourse model
+
+
+viewCourse : Model -> Browser.Document Msg
+viewCourse model =
+    case model.course of
+        Just cm ->
+            let
+                rightPanel = renderRightPanel cm
+            in
+            { title = cm.title ++ " · UniTN Problemset"
             , body =
                 [ Shell.view
-                    (H.text "")
-                    (Sidebar.view { startEnabled = False } |> H.map HomeMsg)
-                    (H.map HomeMsg (Home.view model.home))
-                    RP.placeholder
-
-                -- 右栏常驻占位
+                    (H.map CourseMsg (Course.topCenter cm))
+                    (H.map CourseMsg Course.leftPanel)
+                    (H.map CourseMsg (Course.view cm))
+                    rightPanel
                 ]
             }
 
-        Route.Course _ _ ->
-            case model.course of
-                Just cm ->
-                    let
-                        rightPanel =
-                            case Course.getCurrentDetail cm of
-                                Just d ->
-                                    RP.view
-                                        { detail = d
-                                        , selected = cm.selected
-                                        , onToggle = Course.ToggleChoice
-                                        , onPrev = Course.NoOp
-                                        , onSubmit = Course.NoOp
-                                        , onNext = Course.NoOp
-                                        , navEnabled = cm.practice
-                                        , submitEnabled = cm.practice
-                                        }
-                                        |> H.map CourseMsg
+        Nothing ->
+            { title = "UniTN Problemset"
+            , body = [ H.text "" ]
+            }
 
-                                Nothing ->
-                                    RP.placeholder
-                    in
-                    { title = cm.title ++ " · UniTN Problemset"
-                    , body =
-                        [ Shell.view
-                            (H.map CourseMsg (Course.topCenter cm))
-                            (H.map CourseMsg Course.leftPanel)
-                            (H.map CourseMsg (Course.view cm))
-                            rightPanel
-                        ]
-                    }
 
-                Nothing ->
-                    { title = "UniTN Problemset"
-                    , body = [ H.text "" ]
-                    }
+renderRightPanel : Course.Model -> Html Msg
+renderRightPanel cm =
+    case Course.getCurrentDetail cm of
+        Just d ->
+            let
+                submitEnabled =
+                    case Course.getCurrentDetail cm of
+                        Just _ ->
+                            not (List.isEmpty cm.selected)
+
+                        Nothing ->
+                            False
+            in
+            RP.view
+                { detail = d
+                , selected = cm.selected
+                , onToggle = Course.ToggleChoice
+                , onPrev = Course.NoOp
+                , onSubmit = Course.NoOp
+                , onNext = Course.NoOp
+                , navEnabled = cm.practice
+                , submitEnabled = submitEnabled
+                }
+                |> H.map CourseMsg
+
+        Nothing ->
+            RP.placeholder

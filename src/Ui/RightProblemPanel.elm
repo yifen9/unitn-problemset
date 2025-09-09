@@ -58,7 +58,7 @@ view props =
                 )
                 [ text "NEXT" ]
             ]
-        , div [ A.class "p-4 grid gap-2 content-start" ]
+        , div [ A.class "p-4 grid gap-2 content-start math-scope" ]
             (List.map
                 (\c ->
                     let

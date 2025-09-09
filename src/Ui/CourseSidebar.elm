@@ -40,25 +40,7 @@ viewActions props =
                    )
             )
             [ text "START" ]
-        , button
-            ([ A.class
-                ("btn w-full "
-                    ++ (if props.startEnabled then
-                            "btn-secondary"
-
-                        else
-                            "btn-disabled"
-                       )
-                )
-             ]
-                ++ (if props.startEnabled then
-                        []
-
-                    else
-                        [ A.disabled True ]
-                   )
-            )
-            [ text "EXPORT" ]
+        , button [ A.class "btn w-full btn-disabled", A.disabled True ] [ text "EXPORT" ]
         ]
 
 
