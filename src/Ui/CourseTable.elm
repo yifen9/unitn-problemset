@@ -35,7 +35,7 @@ thc current asc label key onSort =
         , A.attribute "aria-sort" (ariaSort current asc key)
         , E.onClick (onSort key)
         ]
-        [ span [ A.class "relative inline-block w-full h-full" ]
+        [ span [ A.class "relative flex w-full h-full" ]
             [ span [ A.class "absolute inset-0 flex items-center justify-center text-2xl font-bold uppercase" ] [ text label ]
             , if key == current then
                 i
