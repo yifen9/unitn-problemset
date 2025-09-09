@@ -5,19 +5,19 @@
 	"problems": [
 		{
 			"id": "P1",
-			"title": "Sample Problem 1",
+			"title": "Basic Addition",
 			"date": "2025-01-03",
-			"path": "P1.md"
+			"path": "P1.json"
 		},
 		{
 			"id": "P2",
-			"title": "Sample Problem 2",
+			"title": "Prime Numbers",
 			"date": "2025-01-07",
-			"path": "P2.md"
+			"path": "P2.json"
 		},
 		{
 			"id": "P3",
-			"title": "Sample Problem 3",
+			"title": "Binary Search Complexity",
 			"date": "2025-01-02",
 			"path": "P3.json"
 		}

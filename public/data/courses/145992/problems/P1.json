@@ -1,0 +1,14 @@
+{
+	"id": "P1",
+	"title": "Basic Addition",
+	"date": "2025-01-03",
+	"question_md": "What is $2 + 2$?",
+	"choices": [
+		{ "id": "A", "text_md": "3" },
+		{ "id": "B", "text_md": "4" },
+		{ "id": "C", "text_md": "5" },
+		{ "id": "D", "text_md": "22" }
+	],
+	"answer": ["B"],
+	"explanation_md": "Because $2 + 2 = 4$."
+}

@@ -7,14 +7,14 @@ import Url.Parser.Query as Q
 
 type Route
     = Home
-    | Course String
+    | Course String (Maybe String)
 
 
 fromUrl : Url -> Route
 fromUrl url =
     case P.parse (P.query (Q.string "course")) url of
         Just (Just cid) ->
-            Course cid
+            Course cid url.fragment
 
         _ ->
             Home

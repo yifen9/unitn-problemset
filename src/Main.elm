@@ -9,6 +9,8 @@ import Page.Home as Home
 import Route
 import Ui.CourseSidebar as Sidebar
 import Url
+import Ui.RightProblemPanel as RP
+
 
 
 type alias Model =
@@ -48,10 +50,10 @@ init _ url key =
             Home.init
     in
     case route of
-        Route.Course cid ->
+        Route.Course cid frag ->
             let
                 ( cm, cc ) =
-                    Course.init cid
+                    Course.init cid frag
             in
             ( { key = key, route = route, home = hm, course = Just cm }
             , Cmd.batch [ Cmd.map HomeMsg hc, Cmd.map CourseMsg cc ]
@@ -80,12 +82,21 @@ update msg model =
                     Route.fromUrl url
             in
             case route of
-                Route.Course cid ->
-                    let
-                        ( cm, cc ) =
-                            Course.init cid
-                    in
-                    ( { model | route = route, course = Just cm }, Cmd.map CourseMsg cc )
+                Route.Course cid frag ->
+                    case model.course of
+                        Just cm ->
+                            let
+                                ( cm2, cc2 ) =
+                                    Course.update (Course.SetFragment frag) cm
+                            in
+                            ( { model | route = route, course = Just cm2 }, Cmd.map CourseMsg cc2 )
+
+                        Nothing ->
+                            let
+                                ( cm, cc ) =
+                                    Course.init cid frag
+                            in
+                            ( { model | route = route, course = Just cm }, Cmd.map CourseMsg cc )
 
                 Route.Home ->
                     ( { model | route = route, course = Nothing }, Cmd.none )
@@ -124,16 +135,35 @@ view model =
                 ]
             }
 
-        Route.Course _ ->
+        Route.Course _ _ ->
             case model.course of
                 Just cm ->
+                    let
+                        rightPanel =
+                            case Course.getCurrentDetail cm of
+                                Just d ->
+                                    RP.view
+                                        { detail = d
+                                        , selected = cm.selected
+                                        , onToggle = Course.ToggleChoice
+                                        , onPrev = Course.NoOp
+                                        , onSubmit = Course.NoOp
+                                        , onNext = Course.NoOp
+                                        , navEnabled = cm.practice
+                                        , submitEnabled = cm.practice
+                                        }
+                                        |> H.map CourseMsg
+
+                                Nothing ->
+                                    H.text ""
+                    in
                     { title = cm.title ++ " · UniTN Problemset"
                     , body =
                         [ Shell.view
                             (H.map CourseMsg (Course.topCenter cm))
                             (H.map CourseMsg Course.leftPanel)
                             (H.map CourseMsg (Course.view cm))
-                            (H.text "")
+                            rightPanel
                         ]
                     }
 

@@ -1,4 +1,4 @@
-module Types exposing (Course, Problem, ProblemSortBy(..), SortBy(..))
+module Types exposing (Choice, Course, Problem, ProblemDetail, ProblemSortBy(..), ProblemSummary, ProblemType(..), SortBy(..))
 
 
 type alias Course =
@@ -29,3 +29,34 @@ type ProblemSortBy
     | PById
     | PByDate
     | PBySolved
+
+
+type ProblemType
+    = Single
+    | Multi
+
+
+type alias Choice =
+    { id : String
+    , textMd : String
+    }
+
+
+type alias ProblemDetail =
+    { id : String
+    , title : String
+    , date : String
+    , ptype : ProblemType
+    , questionMd : String
+    , choices : List Choice
+    , answer : List String
+    , explanationMd : String
+    }
+
+
+type alias ProblemSummary =
+    { id : String
+    , title : String
+    , date : String
+    , path : String
+    }
