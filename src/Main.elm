@@ -1,4 +1,4 @@
-port module Main exposing (main)
+module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav
@@ -11,8 +11,6 @@ import Route
 import Ui.CourseSidebar as Sidebar
 import Ui.RightProblemPanel as RP
 import Url
-
-port katexRender : String -> Cmd msg
 
 
 type alias Model =
@@ -67,19 +65,6 @@ init _ url key =
             )
 
 
-viewHome : Model -> Browser.Document Msg
-viewHome model =
-    { title = "UniTN Problemset"
-    , body =
-        [ Shell.view
-            (H.text "")
-            (Sidebar.view { startEnabled = False } |> H.map HomeMsg)
-            (H.map HomeMsg (Home.view model.home))
-            RP.placeholder
-        ]
-    }
-
-
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -130,12 +115,7 @@ update msg model =
                         ( cm2, cc2 ) =
                             Course.update sub cm
                     in
-                    ( { model | course = Just cm2 }
-                    , Cmd.batch
-                        [ Cmd.map CourseMsg cc2
-                        , katexRender "tick"
-                        ]
-                    )
+                    ( { model | course = Just cm2 }, Cmd.map CourseMsg cc2 )
 
                 Nothing ->
                     ( model, Cmd.none )
@@ -145,7 +125,15 @@ view : Model -> Browser.Document Msg
 view model =
     case model.route of
         Route.Home ->
-            viewHome model
+            { title = "UniTN Problemset"
+            , body =
+                [ Shell.view
+                    (H.text "")
+                    (Sidebar.view { startEnabled = False } |> H.map HomeMsg)
+                    (H.map HomeMsg (Home.view model.home))
+                    RP.placeholder
+                ]
+            }
 
         Route.Course _ _ ->
             viewCourse model

@@ -1,9 +1,10 @@
 module Ui.RightProblemPanel exposing (Props, placeholder, view)
 
-import Html exposing (Html, button, div, span, text, node)
+import Html exposing (Html, button, div, span, text)
 import Html.Attributes as A
 import Html.Events as E
 import Types exposing (ProblemDetail, ProblemType(..))
+import Ui.Math as Math
 
 
 type alias Props msg =
@@ -58,7 +59,7 @@ view props =
                 )
                 [ text "NEXT" ]
             ]
-        , div [ A.class "p-4 grid gap-2 content-start math-scope" ]
+        , div [ A.class "p-4 grid gap-2 content-start" ]
             (List.map
                 (\c ->
                     let
@@ -80,7 +81,7 @@ view props =
                         , E.onClick (props.onToggle c.id)
                         ]
                         [ span [ A.class "font-mono mr-2" ] [ text c.id ]
-                        , node "katex-host" [ A.attribute "data-content" c.textMd ] []
+                        , Math.inline c.textMd
                         ]
                 )
                 props.detail.choices
