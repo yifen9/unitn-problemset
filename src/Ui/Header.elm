@@ -7,18 +7,19 @@ import Html.Events as E
 
 viewWithSearch : (String -> msg) -> String -> Html msg
 viewWithSearch onQuery q =
-    header [ A.class "navbar fixed top-0 inset-x-0 z-50 h-14 bg-base-100 border-b-2 border-base-300/60" ]
-        [ div [ A.class "navbar-start" ]
+    header [ A.class "navbar fixed top-0 inset-x-0 z-50 h-14 bg-base-100 border-b-2 border-base-300/60", A.attribute "role" "banner" ]
+        [ div [ A.class "navbar-start h-full flex items-center justify-center" ]
             [ a [ A.href "/", A.class "btn btn-ghost text-2xl font-bold" ] [ text "UniTN Problemset" ] ]
         , div [ A.class "navbar-center w-2/3" ]
             [ input
-                [ A.class "input input-bordered w-full rounded-md text-xl text-center uppercase tracking-wide"
+                [ A.class "input input-bordered w-full rounded-md text-xl text-center uppercase font-bold tracking-wide"
+                , A.attribute "aria-label" "Search courses by name or id"
                 , E.onInput onQuery
                 , A.value q
                 ]
                 []
             ]
-        , div [ A.class "navbar-end gap-1 pr-2" ]
+        , div [ A.class "navbar-end h-full flex items-center justify-center gap-1 pr-2" ]
             [ iconLink "https://webapps.unitn.it/gestionecorsi" "Moodle" "fa-solid fa-graduation-cap"
             , iconLink "https://discord.com/invite/your-server" "Discord" "fa-brands fa-discord"
             , iconLink "https://github.com/yifen9/unitn-problemset" "GitHub" "fa-brands fa-github"

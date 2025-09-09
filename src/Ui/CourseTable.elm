@@ -1,8 +1,9 @@
 module Ui.CourseTable exposing (view)
 
-import Html exposing (Html, a, div, i, node, table, tbody, td, text, th, thead, tr)
+import Html exposing (Html, a, div, i, node, span, table, tbody, td, text, th, thead, tr)
 import Html.Attributes as A
 import Html.Events as E
+import Json.Decode as D
 import Types exposing (Course, SortBy(..))
 
 
@@ -14,55 +15,75 @@ type alias Props msg =
     }
 
 
+onKeySort : (SortBy -> msg) -> SortBy -> Html.Attribute msg
+onKeySort onSort key =
+    E.on "keydown"
+        (D.field "key" D.string
+            |> D.andThen
+                (\k ->
+                    if k == "Enter" || k == " " then
+                        D.succeed (onSort key)
+
+                    else
+                        D.fail "skip"
+                )
+        )
+
+
+ariaSort : SortBy -> Bool -> SortBy -> String
+ariaSort current asc key =
+    if key /= current then
+        "none"
+
+    else if asc then
+        "ascending"
+
+    else
+        "descending"
+
+
 thc : SortBy -> Bool -> String -> SortBy -> (SortBy -> msg) -> Html msg
 thc current asc label key onSort =
-    let
-        selected =
-            key == current
-
-        baseCls =
-            "px-6 py-5 text-2xl font-bold uppercase text-center border-b-2 border-base-300/60 cursor-pointer select-none "
-
-        hl =
-            if selected then
-                "bg-primary text-primary-content"
-
-            else
-                "bg-base-200"
-    in
     th
-        [ A.class (baseCls ++ hl)
+        [ A.class "px-6 py-5 text-2xl font-bold uppercase text-center bg-base-200 border-b-2 border-base-300/60"
+        , A.attribute "role" "columnheader"
+        , A.attribute "tabindex" "0"
+        , A.attribute "aria-sort" (ariaSort current asc key)
         , E.onClick (onSort key)
+        , onKeySort onSort key
         ]
-        [ text label
-        , if selected then
-            i
-                [ A.class
-                    ("ml-3 fa-solid "
-                        ++ (if asc then
-                                "fa-sort-up"
+        [ span [ A.class "relative inline-block w-full" ]
+            [ span [ A.class "pointer-events-none" ] [ text label ]
+            , if key == current then
+                i
+                    [ A.class
+                        ("fa-solid absolute right-4 top-1/2 -translate-y-1/2 "
+                            ++ (if asc then
+                                    "fa-sort-up"
 
-                            else
-                                "fa-sort-down"
-                           )
-                    )
-                ]
-                []
+                                else
+                                    "fa-sort-down"
+                               )
+                        )
+                    , A.attribute "aria-hidden" "true"
+                    ]
+                    []
 
-          else
-            text ""
+              else
+                text ""
+            ]
         ]
 
 
 tdName : Course -> Html msg
 tdName c =
-    td [ A.class "px-6 py-5 text-2xl border-b-2 border-base-300/60" ]
+    td [ A.class "px-6 py-5 text-2xl border-b-2 border-base-300/60", A.attribute "role" "gridcell" ]
         [ a [ A.href ("/?subject=" ++ c.id), A.class "link" ] [ text c.name ] ]
 
 
 tdC : String -> Html msg
 tdC s =
-    td [ A.class "px-6 py-5 text-2xl text-center border-b-2 border-base-300/60" ] [ text s ]
+    td [ A.class "px-6 py-5 text-2xl text-center border-b-2 border-base-300/60", A.attribute "role" "gridcell" ] [ text s ]
 
 
 view : Props msg -> Html msg
@@ -74,24 +95,24 @@ view props =
         sixth =
             node "col" [ A.attribute "style" "width:16.6667%" ] []
     in
-    div [ A.class "relative h-full overflow-y-auto" ]
-        [ div [ A.class "pointer-events-none absolute inset-y-0 left-1/2 border-l-2 border-base-300/60" ] []
-        , div [ A.class "pointer-events-none absolute inset-y-0 left-[66.6667%] border-l-2 border-base-300/60" ] []
-        , div [ A.class "pointer-events-none absolute inset-y-0 left-[83.3333%] border-l-2 border-base-300/60" ] []
-        , table [ A.class "w-full table-fixed border-collapse m-0" ]
+    div [ A.class "relative h-full overflow-y-auto", A.attribute "role" "region", A.attribute "aria-label" "Courses table" ]
+        [ div [ A.class "pointer-events-none absolute inset-y-0 left-1/2 border-l-2 border-base-300/60 z-20" ] []
+        , div [ A.class "pointer-events-none absolute inset-y-0 left-[66.6667%] border-l-2 border-base-300/60 z-20" ] []
+        , div [ A.class "pointer-events-none absolute inset-y-0 left-[83.3333%] border-l-2 border-base-300/60 z-20" ] []
+        , table [ A.class "w-full table-fixed border-collapse m-0", A.attribute "role" "grid", A.attribute "aria-rowcount" (String.fromInt (List.length props.courses + 1)) ]
             [ node "colgroup" [] [ half, sixth, sixth, sixth ]
-            , thead [ A.class "sticky top-0 z-10" ]
-                [ tr []
+            , thead [ A.class "sticky top-0 z-30 border-b-2 border-base-300/60", A.attribute "role" "rowgroup" ]
+                [ tr [ A.attribute "role" "row" ]
                     [ thc props.sortBy props.asc "NAME" ByName props.onSort
                     , thc props.sortBy props.asc "ID" ById props.onSort
                     , thc props.sortBy props.asc "SIZE" BySize props.onSort
                     , thc props.sortBy props.asc "COVERAGE" ByCoverage props.onSort
                     ]
                 ]
-            , tbody []
-                (List.map
-                    (\c ->
-                        tr []
+            , tbody [ A.attribute "role" "rowgroup" ]
+                (List.indexedMap
+                    (\_ c ->
+                        tr [ A.attribute "role" "row" ]
                             [ tdName c
                             , tdC c.id
                             , tdC (String.fromInt c.size)
