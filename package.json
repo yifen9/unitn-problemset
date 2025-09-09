@@ -2,6 +2,7 @@
 	"name": "unitn-problemset",
 	"private": true,
 	"scripts": {
+		"build:data": "bun scripts/build-questions.ts",
 		"build": "vite build",
 		"dev": "vite dev --host 0.0.0.0 --port 8080",
 		"lint": "elm-format --validate src && biome check",

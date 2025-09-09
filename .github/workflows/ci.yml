@@ -23,8 +23,8 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
-      - run: bun run build:data
-        if: ${{ hashFiles('scripts/**') != '' }}
+      #- run: bun run build:data
+      #  if: ${{ hashFiles('scripts/**') != '' }}
       - run: bun run build
       - run: |
           if [ -n "${CUSTOM_DOMAIN:-}" ]; then
