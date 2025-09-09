@@ -1,0 +1,17 @@
+services:
+  unitn-problemset:
+    image: oven/bun:latest
+    container_name: unitn-problemset
+    working_dir: /workspace
+    ports:
+      - "8888:8080"
+    volumes:
+      - "..:/workspace"
+    command: >
+      bash -lc "
+        apt-get update &&
+        apt-get install -y ca-certificates &&
+        bun install &&
+        bun run build &&
+        tail -f /dev/null
+      "

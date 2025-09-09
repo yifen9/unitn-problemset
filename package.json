@@ -1,0 +1,28 @@
+{
+  "name": "unitn-problemset",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev --host 0.0.0.0 --port 8080",
+    "lint": "elm-format --validate src && biome check",
+    "fix": "elm-format --yes src && biome check --write",
+    "update": "bun update --latest && elm-json upgrade --unsafe"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.3",
+    "@tailwindcss/vite": "^4.1.13",
+    "daisyui": "^5.1.9",
+    "vite": "^5.4.20",
+    "vite-plugin-elm": "^2.9.0",
+    "typescript": "^5.9.2",
+    "elm": "^0.19.1-6",
+    "elm-format": "^0.8.8",
+    "elm-json": "^0.2.13",
+    "tailwindcss": "^4.1.13",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3"
+  },
+  "dependencies": {
+    "katex": "^0.16.22"
+  }
+}

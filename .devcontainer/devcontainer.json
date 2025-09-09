@@ -1,0 +1,16 @@
+{
+	"dockerComposeFile": "compose.yaml",
+	"service": "unitn-problemset",
+	"workspaceFolder": "/workspace",
+	"shutdownAction": "stopCompose",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"elmtooling.elm-ls-vscode",
+				"antfu.vite",
+                "oven.bun-vscode",
+                "bradlc.vscode-tailwindcss"
+			]
+		}
+	}
+}
