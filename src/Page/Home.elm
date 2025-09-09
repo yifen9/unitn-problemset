@@ -4,9 +4,8 @@ import Html exposing (Html, div)
 import Html.Attributes as A
 import Lib.CourseOps as Ops
 import Lib.Courses as C
-import Types exposing (Course, SortBy(..))
 import Ui.CourseTable as T
-
+import Types exposing (Course, SortBy(..))
 
 type alias Model =
     { build : String
@@ -16,19 +15,16 @@ type alias Model =
     , asc : Bool
     }
 
-
 type Msg
     = Loaded C.LoadResult
     | SetQuery String
     | ToggleSort SortBy
-
 
 init : ( Model, Cmd Msg )
 init =
     ( { build = "", courses = [], query = "", sortBy = ByName, asc = True }
     , C.load Loaded
     )
-
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -45,19 +41,14 @@ update msg model =
         ToggleSort key ->
             if model.sortBy == key then
                 ( { model | asc = not model.asc }, Cmd.none )
-
             else
                 ( { model | sortBy = key, asc = True }, Cmd.none )
-
 
 view : Model -> Html Msg
 view model =
     let
-        filtered =
-            Ops.filter model.query model.courses
-
-        sorted =
-            Ops.sort model.sortBy model.asc filtered
+        filtered = Ops.filter model.query model.courses
+        sorted = Ops.sort model.sortBy model.asc filtered
     in
     div [ A.class "h-full" ]
         [ T.view
