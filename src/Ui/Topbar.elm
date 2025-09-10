@@ -13,7 +13,7 @@ viewIcons : Html msg
 viewIcons =
     div [ A.class "flex items-center gap-2" ]
         [ iconLink "https://webapps.unitn.it/gestionecorsi" "Moodle" "fa-solid fa-graduation-cap"
-        , iconLink "https://discord.com/invite/your-server" "Discord" "fa-brands fa-discord"
+        , iconLink "https://discord.gg/f3tNxeHTYU" "Discord" "fa-brands fa-discord"
         , iconLink "https://github.com/yifen9/unitn-problemset" "GitHub" "fa-brands fa-github"
         ]
 

@@ -24,9 +24,10 @@
 			}
 		},
 		{
-			"includes": ["src/elm.d.ts"],
+			"includes": ["src/elm.d.ts", "src/main.ts", "src/katex-host.ts"],
 			"linter": {
 				"rules": {
+					"style": { "noNonNullAssertion": "off" },
 					"suspicious": { "noExplicitAny": "off" }
 				}
 			}

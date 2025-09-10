@@ -25,13 +25,8 @@ jobs:
       - run: bun install
       #- run: bun run build:data
       #  if: ${{ hashFiles('scripts/**') != '' }}
+      - run: bun run lint
       - run: bun run build
-      - run: |
-          if [ -n "${CUSTOM_DOMAIN:-}" ]; then
-            echo "$CUSTOM_DOMAIN" > dist/CNAME
-          fi
-        env:
-          CUSTOM_DOMAIN: pset.yifen9.li
       - uses: actions/upload-pages-artifact@main
         with:
           path: dist

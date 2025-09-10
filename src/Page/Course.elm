@@ -10,16 +10,17 @@ module Page.Course exposing
     )
 
 import Dict exposing (Dict)
-import Html exposing (Html, a, div, text)
+import Html exposing (Html, a, div, h2, p, text)
 import Html.Attributes as A
 import Html.Events as E
 import Lib.Courses as Courses
 import Lib.Problems as P
 import Types exposing (Problem, ProblemDetail, ProblemSortBy(..), ProblemSummary, ProblemType(..))
-import Ui.CourseSidebar as Sidebar
+import Ui.LeftPanel as Sidebar
+import Ui.Math as Math
 import Ui.ProblemContent as PC
 import Ui.ProblemTable as PT
-import Ui.RightProblemPanel as RP
+import Ui.RightPanel as RP
 
 
 type ViewMode
@@ -38,6 +39,8 @@ type alias Model =
     , pasc : Bool
     , selected : List String
     , practice : Bool
+    , revealed : Bool
+    , lastPid : Maybe String
     }
 
 
@@ -48,6 +51,7 @@ type Msg
     | TogglePSort ProblemSortBy
     | SetFragment (Maybe String)
     | ToggleChoice String
+    | Submit
     | NoOp
     | GoList
 
@@ -78,12 +82,19 @@ init cid frag =
       , pasc = True
       , selected = []
       , practice = False
+      , revealed = False
+      , lastPid = Nothing
       }
     , Cmd.batch
         [ Courses.load Loaded
         , P.loadIndex cid LoadedIndex
         ]
     )
+
+
+eqSet : List String -> List String -> Bool
+eqSet a b =
+    List.sort a == List.sort b
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -143,13 +154,13 @@ update msg model =
                                     else
                                         P.loadOne model.id (findPath pid model.summaries) (LoadedOne pid)
                             in
-                            ( { model | mode = ProblemView pid, selected = [] }, cmd )
+                            ( { model | mode = ProblemView pid, selected = [], revealed = False, lastPid = Just pid }, cmd )
 
                         _ ->
-                            ( { model | mode = TableView }, Cmd.none )
+                            ( { model | mode = TableView, revealed = False, lastPid = Nothing }, Cmd.none )
 
                 Nothing ->
-                    ( { model | mode = TableView }, Cmd.none )
+                    ( { model | mode = TableView, revealed = False, lastPid = Nothing }, Cmd.none )
 
         ToggleChoice cid ->
             let
@@ -176,11 +187,41 @@ update msg model =
             in
             ( { model | selected = chosen }, Cmd.none )
 
+        Submit ->
+            case model.mode of
+                ProblemView pid ->
+                    case Dict.get pid model.details of
+                        Just d ->
+                            let
+                                correct =
+                                    eqSet model.selected d.answer
+
+                                updateSolved p =
+                                    if p.id == pid then
+                                        { p | solved = correct }
+
+                                    else
+                                        p
+                            in
+                            ( { model
+                                | problems = List.map updateSolved model.problems
+                                , revealed = True
+                                , lastPid = Just pid
+                              }
+                            , Cmd.none
+                            )
+
+                        Nothing ->
+                            ( model, Cmd.none )
+
+                TableView ->
+                    ( model, Cmd.none )
+
         NoOp ->
             ( model, Cmd.none )
 
         GoList ->
-            ( { model | mode = TableView }, Cmd.none )
+            ( { model | mode = TableView, revealed = False, lastPid = Nothing }, Cmd.none )
 
 
 view : Model -> Html Msg
@@ -188,7 +229,8 @@ view model =
     case model.mode of
         TableView ->
             PT.view
-                { problems = sortProblems model.psort model.pasc model.problems
+                { courseId = model.id
+                , problems = sortProblems model.psort model.pasc model.problems
                 , sortBy = model.psort
                 , asc = model.pasc
                 , onSort = TogglePSort
@@ -197,10 +239,72 @@ view model =
         ProblemView pid ->
             case Dict.get pid model.details of
                 Just d ->
-                    PC.view d
+                    div []
+                        [ PC.view d
+                        , solutionBlock model pid d
+                        ]
 
                 Nothing ->
                     div [ A.class "p-6" ] [ text "Loading..." ]
+
+
+solutionBlock : Model -> String -> ProblemDetail -> Html Msg
+solutionBlock model pid detail =
+    if model.revealed && model.lastPid == Just pid then
+        let
+            correct =
+                eqSet model.selected detail.answer
+
+            verdictClass =
+                if correct then
+                    "alert alert-success"
+
+                else
+                    "alert alert-error"
+
+            yourAns =
+                if List.isEmpty model.selected then
+                    "—"
+
+                else
+                    String.join ", " model.selected
+
+            rightAns =
+                if List.isEmpty detail.answer then
+                    "—"
+
+                else
+                    String.join ", " detail.answer
+
+            hasExp =
+                String.trim detail.explanationMd /= ""
+        in
+        div [ A.class "p-6 grid gap-4 content-start" ]
+            [ div [ A.class verdictClass ]
+                [ h2 [ A.class "font-bold text-xl" ]
+                    [ text
+                        (if correct then
+                            "Correct"
+
+                         else
+                            "Incorrect"
+                        )
+                    ]
+                , p [] [ text ("Your answer: " ++ yourAns) ]
+                , p [] [ text ("Correct answer: " ++ rightAns) ]
+                ]
+            , if hasExp then
+                div [ A.class "grid gap-2" ]
+                    [ h2 [ A.class "text-xl font-semibold uppercase tracking-wide" ] [ text "Explanation" ]
+                    , Math.block detail.explanationMd
+                    ]
+
+              else
+                text ""
+            ]
+
+    else
+        text ""
 
 
 topCenter : Model -> Html Msg
@@ -215,7 +319,7 @@ topCenter model =
 
 leftPanel : Html Msg
 leftPanel =
-    Sidebar.view { startEnabled = True }
+    Sidebar.view { startEnabled = False }
 
 
 sortProblems : ProblemSortBy -> Bool -> List Problem -> List Problem

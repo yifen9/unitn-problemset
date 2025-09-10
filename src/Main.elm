@@ -7,9 +7,11 @@ import Layouts.Shell as Shell
 import List
 import Page.Course as Course
 import Page.Home as Home
+import Page.Problem as Problem
 import Route
-import Ui.CourseSidebar as Sidebar
-import Ui.RightProblemPanel as RP
+import Types
+import Ui.LeftPanel as Sidebar
+import Ui.RightPanel as RP
 import Url
 
 
@@ -18,6 +20,7 @@ type alias Model =
     , route : Route.Route
     , home : Home.Model
     , course : Maybe Course.Model
+    , problem : Maybe Problem.Model
     }
 
 
@@ -26,6 +29,7 @@ type Msg
     | UrlChanged Url.Url
     | HomeMsg Home.Msg
     | CourseMsg Course.Msg
+    | ProblemMsg Problem.Msg
 
 
 main : Program () Model Msg
@@ -50,17 +54,26 @@ init _ url key =
             Home.init
     in
     case route of
-        Route.Course cid frag ->
+        Route.Problem cid pid ->
+            let
+                ( pm, pc ) =
+                    Problem.init cid pid
+            in
+            ( { key = key, route = route, home = hm, course = Nothing, problem = Just pm }
+            , Cmd.batch [ Cmd.map HomeMsg hc, Cmd.map ProblemMsg pc ]
+            )
+
+        Route.Course cid ->
             let
                 ( cm, cc ) =
-                    Course.init cid frag
+                    Course.init cid Nothing
             in
-            ( { key = key, route = route, home = hm, course = Just cm }
+            ( { key = key, route = route, home = hm, course = Just cm, problem = Nothing }
             , Cmd.batch [ Cmd.map HomeMsg hc, Cmd.map CourseMsg cc ]
             )
 
         Route.Home ->
-            ( { key = key, route = route, home = hm, course = Nothing }
+            ( { key = key, route = route, home = hm, course = Nothing, problem = Nothing }
             , Cmd.map HomeMsg hc
             )
 
@@ -82,24 +95,40 @@ update msg model =
                     Route.fromUrl url
             in
             case route of
-                Route.Course cid frag ->
-                    case model.course of
-                        Just cm ->
+                Route.Problem cid pid ->
+                    case model.problem of
+                        Just _ ->
                             let
-                                ( cm2, cc2 ) =
-                                    Course.update (Course.SetFragment frag) cm
+                                ( pm, pc ) =
+                                    Problem.init cid pid
                             in
-                            ( { model | route = route, course = Just cm2 }, Cmd.map CourseMsg cc2 )
+                            ( { model | route = route, course = Nothing, problem = Just pm }, Cmd.map ProblemMsg pc )
+
+                        Nothing ->
+                            let
+                                ( pm, pc ) =
+                                    Problem.init cid pid
+                            in
+                            ( { model | route = route, course = Nothing, problem = Just pm }, Cmd.map ProblemMsg pc )
+
+                Route.Course cid ->
+                    case model.course of
+                        Just _ ->
+                            let
+                                ( cm, cc ) =
+                                    Course.init cid Nothing
+                            in
+                            ( { model | route = route, course = Just cm, problem = Nothing }, Cmd.map CourseMsg cc )
 
                         Nothing ->
                             let
                                 ( cm, cc ) =
-                                    Course.init cid frag
+                                    Course.init cid Nothing
                             in
-                            ( { model | route = route, course = Just cm }, Cmd.map CourseMsg cc )
+                            ( { model | route = route, course = Just cm, problem = Nothing }, Cmd.map CourseMsg cc )
 
                 Route.Home ->
-                    ( { model | route = route, course = Nothing }, Cmd.none )
+                    ( { model | route = route, course = Nothing, problem = Nothing }, Cmd.none )
 
         HomeMsg sub ->
             let
@@ -120,6 +149,18 @@ update msg model =
                 Nothing ->
                     ( model, Cmd.none )
 
+        ProblemMsg sub ->
+            case model.problem of
+                Just pm ->
+                    let
+                        ( pm2, pc2 ) =
+                            Problem.update sub pm
+                    in
+                    ( { model | problem = Just pm2 }, Cmd.map ProblemMsg pc2 )
+
+                Nothing ->
+                    ( model, Cmd.none )
+
 
 view : Model -> Browser.Document Msg
 view model =
@@ -135,8 +176,11 @@ view model =
                 ]
             }
 
-        Route.Course _ _ ->
+        Route.Course _ ->
             viewCourse model
+
+        Route.Problem _ _ ->
+            viewProblem model
 
 
 viewCourse : Model -> Browser.Document Msg
@@ -171,7 +215,7 @@ renderRightPanel cm =
                 submitEnabled =
                     case Course.getCurrentDetail cm of
                         Just _ ->
-                            not (List.isEmpty cm.selected)
+                            not (List.isEmpty cm.selected) && not cm.revealed
 
                         Nothing ->
                             False
@@ -181,7 +225,7 @@ renderRightPanel cm =
                 , selected = cm.selected
                 , onToggle = Course.ToggleChoice
                 , onPrev = Course.NoOp
-                , onSubmit = Course.NoOp
+                , onSubmit = Course.Submit
                 , onNext = Course.NoOp
                 , navEnabled = cm.practice
                 , submitEnabled = submitEnabled
@@ -190,3 +234,56 @@ renderRightPanel cm =
 
         Nothing ->
             RP.placeholder
+
+
+viewProblem : Model -> Browser.Document Msg
+viewProblem model =
+    case model.problem of
+        Just pm ->
+            let
+                submitEnabled =
+                    case pm.detail of
+                        Just _ ->
+                            not (List.isEmpty pm.selected) && not pm.revealed
+
+                        Nothing ->
+                            False
+            in
+            { title = pm.pid ++ " · UniTN Problemset"
+            , body =
+                [ Shell.view
+                    (H.map ProblemMsg (Problem.topCenter pm))
+                    (H.map ProblemMsg Problem.leftPanel)
+                    (H.map ProblemMsg (Problem.view pm))
+                    (RP.view
+                        { detail = Maybe.withDefault dummyDetail pm.detail
+                        , selected = pm.selected
+                        , onToggle = Problem.ToggleChoice
+                        , onPrev = Problem.NoOp
+                        , onSubmit = Problem.Submit
+                        , onNext = Problem.NoOp
+                        , navEnabled = False
+                        , submitEnabled = submitEnabled
+                        }
+                        |> H.map ProblemMsg
+                    )
+                ]
+            }
+
+        Nothing ->
+            { title = "UniTN Problemset"
+            , body = [ H.text "" ]
+            }
+
+
+dummyDetail : Types.ProblemDetail
+dummyDetail =
+    { id = ""
+    , title = ""
+    , date = ""
+    , ptype = Types.Single
+    , questionMd = ""
+    , choices = []
+    , answer = []
+    , explanationMd = ""
+    }

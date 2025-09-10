@@ -10,10 +10,10 @@
 		"update": "bun update --latest && elm-json upgrade --unsafe"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.2.3",
+		"@biomejs/biome": "^2.2.4",
 		"@tailwindcss/typography": "^0.5.16",
 		"@tailwindcss/vite": "^4.1.13",
-		"daisyui": "^5.1.9",
+		"daisyui": "^5.1.10",
 		"vite": "^7.1.5",
 		"vite-plugin-elm": "^3.0.1",
 		"typescript": "^5.9.2",
