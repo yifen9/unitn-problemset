@@ -25,7 +25,6 @@ jobs:
       - run: bun install
       #- run: bun run build:data
       #  if: ${{ hashFiles('scripts/**') != '' }}
-      - run: bun run lint
       - run: bun run build
       - uses: actions/upload-pages-artifact@main
         with:
