@@ -15,6 +15,6 @@ view topCenter leftPanel content rightPanel =
         , div [ A.class "row-start-1 col-start-2 flex items-center justify-center border-b-2 border-base-300/60" ] [ topCenter ]
         , div [ A.class "row-start-1 col-start-3 flex items-center justify-center border-b-2 border-base-300/60" ] [ Topbar.viewIcons ]
         , aside [ A.class "row-start-2 col-start-1 overflow-y-auto border-r-2 border-base-300/60" ] [ leftPanel ]
-        , main_ [ A.class "row-start-2 col-start-2 overflow-y-auto border-r-2 border-base-300/60 p-0 m-0" ] [ content ]
+        , main_ [ A.class "row-start-2 col-start-2 overflow-hidden border-r-2 border-base-300/60 p-0 m-0" ] [ content ]
         , aside [ A.class "row-start-2 col-start-3 overflow-y-auto border-r-2 border-base-300/60" ] [ rightPanel ]
         ]

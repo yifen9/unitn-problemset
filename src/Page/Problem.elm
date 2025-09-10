@@ -8,20 +8,21 @@ module Page.Problem exposing
     , view
     )
 
-import Dict
-import Html exposing (Html, a, div, h2, p, text)
+import Html exposing (Html, a, div, text)
 import Html.Attributes as A
-import Html.Events as E
+import Lib.Courses as Courses
 import Lib.Problems as P
 import Types exposing (ProblemDetail, ProblemSummary, ProblemType(..))
 import Ui.LeftPanel as Sidebar
-import Ui.Math as Math
 import Ui.ProblemContent as PC
-import Ui.RightPanel as RP
+import Ui.ProblemSolution as PS
+import Ui.ProblemStatementPane as SP
+import Ui.SplitPane as SplitPane
 
 
 type alias Model =
     { courseId : String
+    , courseTitle : String
     , pid : String
     , summaries : List ProblemSummary
     , detail : Maybe ProblemDetail
@@ -33,27 +34,46 @@ type alias Model =
 type Msg
     = LoadedIndex P.LoadIndexResult
     | LoadedOne P.LoadOneResult
+    | LoadedCourse Courses.LoadResult
     | ToggleChoice String
     | Submit
     | NoOp
 
 
-init : String -> String -> ( Model, Cmd Msg )
-init cid pid =
+init : String -> String -> Bool -> ( Model, Cmd Msg )
+init cid pid reveal =
     ( { courseId = cid
+      , courseTitle = cid
       , pid = pid
       , summaries = []
       , detail = Nothing
       , selected = []
-      , revealed = False
+      , revealed = reveal
       }
-    , P.loadIndex cid LoadedIndex
+    , Cmd.batch
+        [ P.loadIndex cid LoadedIndex
+        , Courses.load LoadedCourse
+        ]
     )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        LoadedCourse (Ok idx) ->
+            let
+                title =
+                    idx.courses
+                        |> List.filter (\c -> c.id == model.courseId)
+                        |> List.head
+                        |> Maybe.map .title
+                        |> Maybe.withDefault model.courseTitle
+            in
+            ( { model | courseTitle = title }, Cmd.none )
+
+        LoadedCourse (Err _) ->
+            ( model, Cmd.none )
+
         LoadedIndex (Ok ix) ->
             let
                 path =
@@ -111,10 +131,14 @@ view model =
             div [ A.class "p-6" ] [ text "Loading..." ]
 
         Just d ->
-            div []
-                [ PC.view d
-                , solutionBlock model d
-                ]
+            if model.revealed then
+                SplitPane.view
+                    { left = SP.view d
+                    , right = PS.view { detail = d, selected = model.selected }
+                    }
+
+            else
+                SP.view d
 
 
 topCenter : Model -> Html Msg
@@ -123,7 +147,7 @@ topCenter model =
         [ A.href ("/?course=" ++ model.courseId)
         , A.class "text-2xl font-extrabold uppercase tracking-wide link"
         ]
-        [ text (model.courseId ++ " · " ++ model.pid) ]
+        [ text model.courseTitle ]
 
 
 leftPanel : Html Msg
@@ -138,67 +162,3 @@ findPath pid summaries =
         |> List.head
         |> Maybe.map .path
         |> Maybe.withDefault (pid ++ ".json")
-
-
-eqSet : List String -> List String -> Bool
-eqSet a b =
-    List.sort a == List.sort b
-
-
-solutionBlock : Model -> ProblemDetail -> Html Msg
-solutionBlock model detail =
-    if model.revealed then
-        let
-            correct =
-                eqSet model.selected detail.answer
-
-            verdictClass =
-                if correct then
-                    "alert alert-success"
-
-                else
-                    "alert alert-error"
-
-            yourAns =
-                if List.isEmpty model.selected then
-                    "—"
-
-                else
-                    String.join ", " model.selected
-
-            rightAns =
-                if List.isEmpty detail.answer then
-                    "—"
-
-                else
-                    String.join ", " detail.answer
-
-            hasExp =
-                String.trim detail.explanationMd /= ""
-        in
-        div [ A.class "p-6 grid gap-4 content-start" ]
-            [ div [ A.class verdictClass ]
-                [ h2 [ A.class "font-bold text-xl" ]
-                    [ text
-                        (if correct then
-                            "Correct"
-
-                         else
-                            "Incorrect"
-                        )
-                    ]
-                , p [] [ text ("Your answer: " ++ yourAns) ]
-                , p [] [ text ("Correct answer: " ++ rightAns) ]
-                ]
-            , if hasExp then
-                div [ A.class "grid gap-2" ]
-                    [ h2 [ A.class "text-xl font-semibold uppercase tracking-wide" ] [ text "Explanation" ]
-                    , Math.block detail.explanationMd
-                    ]
-
-              else
-                text ""
-            ]
-
-    else
-        text ""
