@@ -2,6 +2,7 @@
 	"id": "P1",
 	"title": "Basic Addition",
 	"date": "2025-01-03",
+	"type": "single",
 	"question_md": "Compute $\\int_0^1 x^2 \\, dx = \\frac{1}{3}$.",
 	"choices": [
 		{ "id": "A", "text_md": "$e^{i\\pi}+1=0$" },

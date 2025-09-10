@@ -2,6 +2,7 @@
 	"id": "P3",
 	"title": "Binary Search Complexity",
 	"date": "2025-01-02",
+	"type": "single",
 	"question_md": "What is the time complexity of binary search on a sorted array?",
 	"choices": [
 		{ "id": "A", "text_md": "$O(1)$" },

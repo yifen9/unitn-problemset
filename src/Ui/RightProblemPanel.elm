@@ -26,6 +26,43 @@ isSelected id sel =
 
 view : Props msg -> Html msg
 view props =
+    let
+        isMulti =
+            case props.detail.ptype of
+                Multi ->
+                    True
+
+                Single ->
+                    False
+
+        groupRole =
+            if isMulti then
+                "group"
+
+            else
+                "radiogroup"
+
+        itemRole =
+            if isMulti then
+                "checkbox"
+
+            else
+                "radio"
+
+        indicator active =
+            if isMulti then
+                if active then
+                    "☑"
+
+                else
+                    "☐"
+
+            else if active then
+                "●"
+
+            else
+                "○"
+    in
     div [ A.class "h-full grid grid-rows-[4rem_1fr]" ]
         [ div [ A.class "h-16 grid grid-cols-3 gap-2 p-2 items-center justify-items-center border-b-2 border-base-300/60" ]
             [ button
@@ -59,7 +96,17 @@ view props =
                 )
                 [ text "NEXT" ]
             ]
-        , div [ A.class "p-2 grid gap-2 content-start" ]
+        , div
+            [ A.class "p-2 grid gap-2 content-start"
+            , A.attribute "role" groupRole
+            , A.attribute "aria-label"
+                (if isMulti then
+                    "Multiple choice"
+
+                 else
+                    "Single choice"
+                )
+            ]
             (List.map
                 (\c ->
                     let
@@ -78,10 +125,19 @@ view props =
                     in
                     button
                         [ A.class cls
+                        , A.attribute "role" itemRole
+                        , A.attribute "aria-checked"
+                            (if active then
+                                "true"
+
+                             else
+                                "false"
+                            )
                         , E.onClick (props.onToggle c.id)
                         ]
-                        [ span [ A.class "text-2xl font-mono mr-2" ] [ text c.id ]
-                        , Html.span [ A.class "text-2xl" ] [ Math.inline c.textMd ]
+                        [ span [ A.class "text-2xl font-mono mr-3" ] [ text (indicator active) ]
+                        , span [ A.class "text-2xl font-mono mr-3" ] [ text c.id ]
+                        , span [ A.class "text-2xl" ] [ Math.inline c.textMd ]
                         ]
                 )
                 props.detail.choices

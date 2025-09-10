@@ -2,6 +2,7 @@
 	"id": "P2",
 	"title": "Prime Numbers",
 	"date": "2025-01-07",
+	"type": "multi",
 	"question_md": "Which of the following are prime numbers? *(Select all that apply.)*",
 	"choices": [
 		{ "id": "A", "text_md": "2" },
