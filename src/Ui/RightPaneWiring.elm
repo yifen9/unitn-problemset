@@ -3,6 +3,7 @@ module Ui.RightPaneWiring exposing (propsForProblem)
 import Page.Problem as Problem
 import Ui.RightPanel as RP
 
+
 propsForProblem : Problem.Model -> Maybe (RP.Props Problem.Msg)
 propsForProblem pm =
     case pm.detail of

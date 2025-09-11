@@ -288,7 +288,7 @@ view model =
 
                 Nothing ->
                     { title = "UniTN Problemset", body = [ H.text "" ] }
-        
+
         Route.ProblemResult _ _ ->
             case model.problem of
                 Just pm ->

@@ -3,6 +3,7 @@ module Ui.ColumnSection exposing (Props, view)
 import Html exposing (Html, div)
 import Html.Attributes as A
 
+
 type alias Props msg =
     { topLeft : Html msg
     , topRight : Html msg
@@ -10,6 +11,7 @@ type alias Props msg =
     , bottomRight : Html msg
     , body : Html msg
     }
+
 
 view : Props msg -> Html msg
 view p =

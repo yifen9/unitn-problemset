@@ -3,10 +3,12 @@ module Ui.ContentBlock exposing (view)
 import Html exposing (Html, div, h1)
 import Html.Attributes as A
 
+
 type alias Props msg =
     { title : Html msg
     , content : Html msg
     }
+
 
 view : Props msg -> Html msg
 view p =

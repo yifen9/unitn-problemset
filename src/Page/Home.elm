@@ -51,7 +51,7 @@ view model =
         sorted =
             Ops.sort model.sortBy model.asc model.courses
     in
-    div [ A.class "h-full" ]
+    div [ A.class "h-full overflow-y-auto" ]
         [ T.view
             { courses = sorted
             , sortBy = model.sortBy

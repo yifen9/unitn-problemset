@@ -7,13 +7,17 @@ import Ui.ColumnSection as Section
 import Ui.ContentBlock as Block
 import Ui.Math as Math
 
+
 view : ProblemDetail -> Html msg
 view d =
     let
         tlabel =
             case d.ptype of
-                Single -> "SINGLE"
-                Multi -> "MULTI"
+                Single ->
+                    "SINGLE"
+
+                Multi ->
+                    "MULTI"
     in
     Section.view
         { topLeft = text "DATE"
