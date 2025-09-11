@@ -4,6 +4,7 @@ import Html exposing (Html, button, div, span, text)
 import Html.Attributes as A
 import Html.Events as E
 import Types exposing (ProblemDetail, ProblemType(..))
+import Ui.Subheader as Sub
 import Ui.Math as Math
 
 type alias Props msg =
@@ -46,15 +47,9 @@ view props =
                 base = "btn btn-lg justify-start"
                 cls = if active then base ++ " btn-primary" else base ++ " btn-outline"
                 disabledAttrs =
-                    if props.disabled then
-                        [ A.class "btn-disabled", A.disabled True ]
-                    else
-                        []
+                    if props.disabled then [ A.class "btn-disabled", A.disabled True ] else []
                 clickAttrs =
-                    if props.disabled then
-                        []
-                    else
-                        [ E.onClick (props.onToggle cid) ]
+                    if props.disabled then [] else [ E.onClick (props.onToggle cid) ]
             in
             [ A.class cls
             , A.attribute "role" itemRole
@@ -63,7 +58,7 @@ view props =
                 ++ disabledAttrs
                 ++ clickAttrs
     in
-    div [ A.class "h-full grid grid-rows-[4rem_1fr]" ]
+    div [ A.class "h-full grid grid-rows-[4rem_4rem_1fr]" ]
         [ div [ A.class "h-16 grid grid-cols-3 gap-2 p-2 items-center justify-items-center border-b-2 border-base-300/60" ]
             [ button
                 ([ A.class "btn w-full" ]
@@ -82,6 +77,7 @@ view props =
                 )
                 [ text "NEXT" ]
             ]
+        , Sub.view "CHOICE"
         , div
             [ A.class "p-2 grid gap-2 content-start"
             , A.attribute "role" groupRole

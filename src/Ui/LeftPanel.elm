@@ -1,36 +1,36 @@
 module Ui.LeftPanel exposing (Props, view, viewActions, viewSettings)
 
-import Html exposing (Html, div, text)
+import Html exposing (Html, button, div, text)
 import Html.Attributes as A
-import Ui.PanelActions as Actions
-
+import Ui.Subheader as Sub
 
 type alias Props =
     { startEnabled : Bool
     }
 
-
 view : Props -> Html msg
 view props =
-    div [ A.class "grid grid-rows-[4rem_1fr] h-full" ]
+    div [ A.class "grid grid-rows-[4rem_4rem_1fr] h-full" ]
         [ viewActions props
+        , Sub.view "CONFIG"
         , viewSettings
         ]
 
-
 viewActions : Props -> Html msg
 viewActions props =
-    Actions.view
-        { left = { label = "IMPORT", kind = Actions.Primary, onClick = Nothing, enabled = True }
-        , middle =
-            { label = "START"
-            , kind = Actions.Secondary
-            , onClick = Nothing
-            , enabled = props.startEnabled
-            }
-        , right = { label = "EXPORT", kind = Actions.Default, onClick = Nothing, enabled = False }
-        }
-
+    div [ A.class "grid grid-cols-3 gap-2 p-2 h-16 items-center justify-items-center border-b-2 border-base-300/60" ]
+        [ button [ A.class "btn btn-primary w-full" ] [ text "IMPORT" ]
+        , button
+            ([ A.class
+                ("btn w-full "
+                    ++ (if props.startEnabled then "btn-secondary" else "btn-disabled")
+                )
+             ]
+                ++ (if props.startEnabled then [] else [ A.disabled True ])
+            )
+            [ text "START" ]
+        , button [ A.class "btn w-full btn-disabled", A.disabled True ] [ text "EXPORT" ]
+        ]
 
 viewSettings : Html msg
 viewSettings =

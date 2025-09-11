@@ -117,18 +117,48 @@ update msg model =
             in
             case route of
                 Route.Problem cid pid ->
-                    let
-                        ( pm, pc ) =
-                            Problem.init cid pid False
-                    in
-                    ( { model | route = route, course = Nothing, result = Nothing, problem = Just pm }, Cmd.map ProblemMsg pc )
+                    case model.problem of
+                        Just pm ->
+                            if pm.courseId == cid && pm.pid == pid then
+                                ( { model | route = route, result = Nothing, problem = Just { pm | revealed = False } }
+                                , Cmd.none
+                                )
+
+                            else
+                                let
+                                    ( pm2, pc2 ) =
+                                        Problem.init cid pid False
+                                in
+                                ( { model | route = route, course = Nothing, result = Nothing, problem = Just pm2 }, Cmd.map ProblemMsg pc2 )
+
+                        Nothing ->
+                            let
+                                ( pm, pc ) =
+                                    Problem.init cid pid False
+                            in
+                            ( { model | route = route, course = Nothing, result = Nothing, problem = Just pm }, Cmd.map ProblemMsg pc )
 
                 Route.ProblemResult cid pid ->
-                    let
-                        ( pm, pc ) =
-                            Problem.init cid pid True
-                    in
-                    ( { model | route = route, course = Nothing, result = Nothing, problem = Just pm }, Cmd.map ProblemMsg pc )
+                    case model.problem of
+                        Just pm ->
+                            if pm.courseId == cid && pm.pid == pid then
+                                ( { model | route = route, result = Nothing, problem = Just { pm | revealed = True } }
+                                , Cmd.none
+                                )
+
+                            else
+                                let
+                                    ( pm2, pc2 ) =
+                                        Problem.init cid pid True
+                                in
+                                ( { model | route = route, course = Nothing, result = Nothing, problem = Just pm2 }, Cmd.map ProblemMsg pc2 )
+
+                        Nothing ->
+                            let
+                                ( pm, pc ) =
+                                    Problem.init cid pid True
+                            in
+                            ( { model | route = route, course = Nothing, result = Nothing, problem = Just pm }, Cmd.map ProblemMsg pc )
 
                 Route.Course cid ->
                     let
