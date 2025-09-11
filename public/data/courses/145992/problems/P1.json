@@ -3,7 +3,7 @@
 	"title": "Basic Addition",
 	"date": "2025-01-03",
 	"type": "single",
-	"question_md": "Compute $\\int_0^1 x^2 \\, dx = \\frac{1}{3}$.\n\n---\n\nEuler's identity is $e^{i\\pi}+1=0$. What is $2 + 2$?aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"question_md": "What is $2 + 2$?",
 	"choices": [
 		{ "id": "A", "text_md": "$e^{i\\pi}+1=0$" },
 		{ "id": "B", "text_md": "4" },
@@ -11,5 +11,5 @@
 		{ "id": "D", "text_md": "22" }
 	],
 	"answer": ["B"],
-	"explanation_md": "Because $2 + 2 = 4$. --- Euler's identity is $e^{i\\pi}+1=0$."
+	"explanation_md": "Because $2 + 2 = 4$."
 }
