@@ -1,14 +1,7 @@
-module Ui.RightPaneWiring exposing (propsForCourse, propsForProblem)
+module Ui.RightPaneWiring exposing (propsForProblem)
 
-import Page.Course as Course
 import Page.Problem as Problem
 import Ui.RightPanel as RP
-
-
-propsForCourse : Course.Model -> Maybe (RP.Props Course.Msg)
-propsForCourse _ =
-    Nothing
-
 
 propsForProblem : Problem.Model -> Maybe (RP.Props Problem.Msg)
 propsForProblem pm =
@@ -27,6 +20,7 @@ propsForProblem pm =
                 , onNext = Problem.NoOp
                 , navEnabled = False
                 , submitEnabled = submitEnabled
+                , disabled = pm.revealed
                 }
 
         Nothing ->

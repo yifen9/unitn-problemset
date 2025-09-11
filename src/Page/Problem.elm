@@ -10,14 +10,13 @@ module Page.Problem exposing
 
 import Html exposing (Html, a, div, text)
 import Html.Attributes as A
-import Lib.Courses as Courses
+import Lib.Courses as C
 import Lib.Problems as P
 import Types exposing (ProblemDetail, ProblemSummary, ProblemType(..))
-import Ui.LeftPanel as Sidebar
-import Ui.ProblemContent as PC
-import Ui.ProblemSolution as PS
-import Ui.ProblemStatementPane as SP
-import Ui.SplitPane as SplitPane
+import Ui.LeftPanel as LP
+import Ui.ProblemSolution as Solution
+import Ui.ProblemStatement as Statement
+import Ui.SplitColumns as SplitColumns
 
 
 type alias Model =
@@ -34,7 +33,7 @@ type alias Model =
 type Msg
     = LoadedIndex P.LoadIndexResult
     | LoadedOne P.LoadOneResult
-    | LoadedCourse Courses.LoadResult
+    | LoadedCourse C.LoadResult
     | ToggleChoice String
     | Submit
     | NoOp
@@ -52,7 +51,7 @@ init cid pid reveal =
       }
     , Cmd.batch
         [ P.loadIndex cid LoadedIndex
-        , Courses.load LoadedCourse
+        , C.load LoadedCourse
         ]
     )
 
@@ -132,13 +131,13 @@ view model =
 
         Just d ->
             if model.revealed then
-                SplitPane.view
-                    { left = SP.view d
-                    , right = PS.view { detail = d, selected = model.selected }
+                SplitColumns.view
+                    { left = Statement.view d
+                    , right = Solution.view { detail = d, selected = model.selected }
                     }
 
             else
-                SP.view d
+                Statement.view d
 
 
 topCenter : Model -> Html Msg
@@ -152,7 +151,7 @@ topCenter model =
 
 leftPanel : Html Msg
 leftPanel =
-    Sidebar.view { startEnabled = False }
+    LP.view { startEnabled = False }
 
 
 findPath : String -> List ProblemSummary -> String

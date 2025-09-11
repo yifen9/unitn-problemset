@@ -1,14 +1,12 @@
-module Ui.SplitPane exposing (view)
+module Ui.SplitColumns exposing (view)
 
 import Html exposing (Html, div)
 import Html.Attributes as A
-
 
 type alias Props msg =
     { left : Html msg
     , right : Html msg
     }
-
 
 view : Props msg -> Html msg
 view props =
