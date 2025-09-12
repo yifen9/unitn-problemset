@@ -2,4 +2,4 @@
 
 ---
 
-![tutorial](https://pset.yifen9.li/video/tutorial_1.mp4)
+https://github.com/user-attachments/assets/f9007cf1-2948-4312-8f34-771fabb302f6
