@@ -2,4 +2,4 @@
 
 ---
 
-![tutorial](https://pset.yifen9.li/video/tutorial.mp4)
+![tutorial](https://pset.yifen9.li/video/tutorial_1.mp4)
