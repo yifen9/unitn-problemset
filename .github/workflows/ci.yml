@@ -23,8 +23,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
-      #- run: bun run build:data
-      #  if: ${{ hashFiles('scripts/**') != '' }}
+      - run: bun run build:data
       - run: bun run build
       - uses: actions/upload-pages-artifact@main
         with:

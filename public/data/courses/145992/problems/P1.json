@@ -1,15 +1,29 @@
 {
-	"id": "P1",
-	"title": "Basic Addition",
-	"date": "2025-01-03",
-	"type": "single",
-	"question_md": "What is $2 + 2$?",
-	"choices": [
-		{ "id": "A", "text_md": "$e^{i\\pi}+1=0$" },
-		{ "id": "B", "text_md": "4" },
-		{ "id": "C", "text_md": "5" },
-		{ "id": "D", "text_md": "22" }
-	],
-	"answer": ["B"],
-	"explanation_md": "Because $2 + 2 = 4$."
+  "id": "P1",
+  "title": "Basic Addition",
+  "date": "2025-01-03",
+  "type": "single",
+  "question_md": "What is $2+2$?",
+  "choices": [
+    {
+      "id": "A",
+      "text_md": "$e^{i\\pi}+1=0$"
+    },
+    {
+      "id": "B",
+      "text_md": "4"
+    },
+    {
+      "id": "C",
+      "text_md": "5"
+    },
+    {
+      "id": "D",
+      "text_md": "22"
+    }
+  ],
+  "answer": [
+    "B"
+  ],
+  "explanation_md": "Because $2+2=4$."
 }

@@ -1,0 +1,30 @@
+{
+  "id": "Q3",
+  "title": "Combinatorics: Binomial",
+  "date": "2025-01-15",
+  "type": "single",
+  "question_md": "Choose all correct equalities.",
+  "choices": [
+    {
+      "id": "A",
+      "text_md": "$\\binom{5}{2}=10$"
+    },
+    {
+      "id": "B",
+      "text_md": "$\\binom{5}{2}=15$"
+    },
+    {
+      "id": "C",
+      "text_md": "$\\binom{6}{2}=10$"
+    },
+    {
+      "id": "D",
+      "text_md": "$\\binom{6}{2}=20$"
+    }
+  ],
+  "answer": [
+    "A",
+    "D"
+  ],
+  "explanation_md": "$\\\\binom{5}{2}=10$；$\\\\binom{6}{2}=15$."
+}

@@ -1,0 +1,29 @@
+{
+  "id": "Q2",
+  "title": "Propositional Logic",
+  "date": "2025-01-12",
+  "type": "single",
+  "question_md": "Which statement is correct?",
+  "choices": [
+    {
+      "id": "A",
+      "text_md": "$p\\lor \\neg p$ is a contradiction"
+    },
+    {
+      "id": "B",
+      "text_md": "$p\\lor \\neg p$ is a tautology"
+    },
+    {
+      "id": "C",
+      "text_md": "$p\\land \\neg p$ is a tautology"
+    },
+    {
+      "id": "D",
+      "text_md": "$p\\land \\neg p$ is satisfiable"
+    }
+  ],
+  "answer": [
+    "B"
+  ],
+  "explanation_md": "$p\\\\lor \\\\neg p$ is always true, so $p\\\\land \\\\neg p$ is always false."
+}

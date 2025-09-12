@@ -1,25 +1,25 @@
 {
-	"courseId": "145992",
-	"build": "2025-09-09",
-	"count": 3,
-	"problems": [
-		{
-			"id": "P1",
-			"title": "Basic Addition",
-			"date": "2025-01-03",
-			"path": "P1.json"
-		},
-		{
-			"id": "P2",
-			"title": "Prime Numbers",
-			"date": "2025-01-07",
-			"path": "P2.json"
-		},
-		{
-			"id": "P3",
-			"title": "Binary Search Complexity",
-			"date": "2025-01-02",
-			"path": "P3.json"
-		}
-	]
+  "courseId": "145992",
+  "build": "2025-09-12",
+  "count": 3,
+  "problems": [
+    {
+      "id": "P3",
+      "title": "Binary Search Complexity",
+      "date": "2025-01-02",
+      "path": "P3.json"
+    },
+    {
+      "id": "P1",
+      "title": "Basic Addition",
+      "date": "2025-01-03",
+      "path": "P1.json"
+    },
+    {
+      "id": "P2",
+      "title": "Prime Numbers",
+      "date": "2025-01-07",
+      "path": "P2.json"
+    }
+  ]
 }

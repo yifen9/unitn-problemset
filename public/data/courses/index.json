@@ -1,155 +1,17 @@
 {
-	"build": "2025-09-09",
-	"courses": [
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "145992",
-			"title": "Computer Architectures",
-			"date": "2025-09-09",
-			"count": 3
-		},
-		{
-			"id": "140001",
-			"title": "Algorithms",
-			"date": "2025-09-09",
-			"count": 90
-		}
-	]
+  "build": "2025-09-12",
+  "courses": [
+    {
+      "id": "145992",
+      "title": "Computer Architectures",
+      "date": "2025-09-09",
+      "count": 3
+    },
+    {
+      "id": "210101",
+      "title": "Discrete Mathematics",
+      "date": "2025-09-01",
+      "count": 3
+    }
+  ]
 }
