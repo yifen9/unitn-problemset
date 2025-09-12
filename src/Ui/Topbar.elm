@@ -12,7 +12,7 @@ viewTitle =
 viewIcons : Html msg
 viewIcons =
     div [ A.class "flex items-center gap-2" ]
-        [ iconLink "https://webapps.unitn.it/gestionecorsi" "Moodle" "fa-solid fa-graduation-cap"
+        [ iconLink "https://www.notion.so/invite/4519605788a15ddffb0f4438f3b13c26c434f62a" "Notion" "fa-brands fa-notion"
         , iconLink "https://discord.gg/f3tNxeHTYU" "Discord" "fa-brands fa-discord"
         , iconLink "https://github.com/yifen9/unitn-problemset" "GitHub" "fa-brands fa-github"
         ]

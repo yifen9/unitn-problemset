@@ -22,7 +22,7 @@ view props =
 viewActions : Props -> Html msg
 viewActions props =
     div [ A.class "grid grid-cols-3 gap-2 p-2 h-16 items-center justify-items-center border-b-2 border-base-300/60" ]
-        [ button [ A.class "btn btn-primary w-full" ] [ text "IMPORT" ]
+        [ button [ A.class "btn w-full btn-disabled", A.disabled True ] [ text "IMPORT" ]
         , button
             ([ A.class
                 ("btn w-full "
