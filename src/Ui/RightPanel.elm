@@ -68,7 +68,7 @@ view props =
         itemAttrs active cid =
             let
                 base =
-                    "btn btn-lg justify-start"
+                    "btn btn-lg w-full justify-start normal-case items-start text-left"
 
                 cls =
                     if active then
@@ -145,7 +145,7 @@ view props =
             ]
         , Sub.view "CHOICE"
         , div
-            [ A.class "p-2 grid gap-2 content-start"
+            [ A.class "p-2 grid gap-2 content-start overflow-y-auto"
             , A.attribute "role" groupRole
             , A.attribute "aria-label"
                 (if isMulti then
@@ -163,9 +163,13 @@ view props =
                     in
                     button
                         (itemAttrs active c.id)
-                        [ span [ A.class "text-2xl font-mono mr-3" ] [ text (indicator active) ]
-                        , span [ A.class "text-2xl font-mono mr-3" ] [ text c.id ]
-                        , span [ A.class "text-2xl" ] [ Math.inline c.textMd ]
+                        [ div [ A.class "flex items-start gap-3 w-full min-w-0" ]
+                            [ span [ A.class "text-2xl font-mono" ] [ text (indicator active) ]
+                            , span [ A.class "text-2xl font-mono" ] [ text c.id ]
+                            , span
+                                [ A.class "flex-1 min-w-0 text-left whitespace-normal break-words leading-snug text-2xl" ]
+                                [ Math.inline c.textMd ]
+                            ]
                         ]
                 )
                 props.detail.choices
