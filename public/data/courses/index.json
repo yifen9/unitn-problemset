@@ -2,10 +2,16 @@
   "build": "2025-09-12",
   "courses": [
     {
-      "id": "145992",
-      "title": "Computer Architectures",
+      "id": "146142",
+      "title": "Physics 2",
       "date": "2025-09-12",
-      "count": 1
+      "count": 3
+    },
+    {
+      "id": "146145",
+      "title": "Signal Processing",
+      "date": "2025-09-12",
+      "count": 5
     }
   ]
 }

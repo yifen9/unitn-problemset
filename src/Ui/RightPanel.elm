@@ -68,7 +68,7 @@ view props =
         itemAttrs active cid =
             let
                 base =
-                    "btn btn-lg w-full justify-start normal-case items-start text-left"
+                    "btn btn-lg w-full justify-start normal-case items-start text-left whitespace-normal h-auto min-h-0 py-3"
 
                 cls =
                     if active then
@@ -164,10 +164,9 @@ view props =
                     button
                         (itemAttrs active c.id)
                         [ div [ A.class "flex items-start gap-3 w-full min-w-0" ]
-                            [ span [ A.class "text-2xl font-mono" ] [ text (indicator active) ]
-                            , span [ A.class "text-2xl font-mono" ] [ text c.id ]
-                            , span
-                                [ A.class "flex-1 min-w-0 text-left whitespace-normal break-words leading-snug text-2xl" ]
+                            [ span [ A.class "text-2xl font-mono shrink-0" ] [ text (indicator active) ]
+                            , span [ A.class "text-2xl font-mono shrink-0" ] [ text c.id ]
+                            , span [ A.class "text-2xl flex-1 min-w-0 text-left whitespace-normal break-words leading-relaxed" ]
                                 [ Math.inline c.textMd ]
                             ]
                         ]

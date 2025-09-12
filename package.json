@@ -5,7 +5,7 @@
 		"import:notion": "bun scripts/import-notion.ts",
 		"build:data": "bun scripts/build-questions.ts",
 		"build": "vite build",
-		"dev": "bun run build:data && bun run build && vite dev --host 0.0.0.0 --port 8080",
+		"dev": "bun run import:notion && bun run build:data && bun run build && vite dev --host 0.0.0.0 --port 8080",
 		"lint": "elm-format --validate src && biome check",
 		"fix": "elm-format --yes src && biome check --write",
 		"update": "bun update --latest && elm-json upgrade --unsafe"
