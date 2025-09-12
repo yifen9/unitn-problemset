@@ -23,6 +23,11 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
+      - run: bun scripts/import-notion.ts
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_COURSES_DB_ID: ${{ secrets.NOTION_COURSES_DB_ID }}
+          NOTION_PROBLEMS_DB_ID: ${{ secrets.NOTION_PROBLEMS_DB_ID }}
       - run: bun run build:data
       - run: bun run build
       - uses: actions/upload-pages-artifact@main

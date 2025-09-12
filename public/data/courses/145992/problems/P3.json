@@ -1,29 +1,27 @@
 {
-  "id": "P3",
-  "title": "Binary Search Complexity",
-  "date": "2025-01-02",
-  "type": "single",
-  "question_md": "For a sorted array of size $n$, what is the worst-case time complexity of binary search?",
-  "choices": [
-    {
-      "id": "A",
-      "text_md": "$\\mathcal O(1)$"
-    },
-    {
-      "id": "B",
-      "text_md": "$\\mathcal O(\\log n)$"
-    },
-    {
-      "id": "C",
-      "text_md": "$\\mathcal O(n)$"
-    },
-    {
-      "id": "D",
-      "text_md": "$\\mathcal O(n\\log n)$"
-    }
-  ],
-  "answer": [
-    "B"
-  ],
-  "explanation_md": "$\\\\mathcal O(\\\\log n)$."
+	"id": "P3",
+	"title": "Binary Search Complexity",
+	"date": "2025-01-02",
+	"type": "single",
+	"question_md": "For a sorted array of size $n$, what is the worst-case time complexity of binary search?",
+	"choices": [
+		{
+			"id": "A",
+			"text_md": "$\\mathcal O(1)$"
+		},
+		{
+			"id": "B",
+			"text_md": "$\\mathcal O(\\log n)$"
+		},
+		{
+			"id": "C",
+			"text_md": "$\\mathcal O(n)$"
+		},
+		{
+			"id": "D",
+			"text_md": "$\\mathcal O(n\\log n)$"
+		}
+	],
+	"answer": ["B"],
+	"explanation_md": "$\\\\mathcal O(\\\\log n)$."
 }

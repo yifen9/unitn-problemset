@@ -2,6 +2,7 @@
 	"title": "unitn-problemset",
 	"private": true,
 	"scripts": {
+		"import:notion": "bun scripts/import-notion.ts",
 		"build:data": "bun scripts/build-questions.ts",
 		"build": "vite build",
 		"dev": "bun run build:data && bun run build && vite dev --host 0.0.0.0 --port 8080",
@@ -27,6 +28,7 @@
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^7.0.1",
+		"@notionhq/client": "^5.0.0",
 		"katex": "^0.16.22",
 		"markdown-it": "^14.1.0"
 	}
